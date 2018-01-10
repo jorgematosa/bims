@@ -2,6 +2,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,9 @@ import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
 import { InfoManagerComponent } from './info-manager/info-manager.component';
 import { PeopleAndProcessesComponent } from './people-and-processes/people-and-processes.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 
 @NgModule({
@@ -22,11 +26,15 @@ import { PeopleAndProcessesComponent } from './people-and-processes/people-and-p
     TicketingComponent,
     InfoManagerComponent,
     PeopleAndProcessesComponent,
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

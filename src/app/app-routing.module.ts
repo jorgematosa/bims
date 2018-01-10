@@ -1,3 +1,4 @@
+import { LoginComponent } from './auth/login/login.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { NgModule } from '@angular/core';
 import { PeopleAndProcessesComponent } from './people-and-processes/people-and-processes.component';
@@ -9,7 +10,8 @@ import { PreloadAllModules } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: '',  component: HomeComponent},
+  // { path: '',  component: HomeComponent},
+  { path: '', component: LoginComponent},
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', component: TaskManagerComponent},
   { path: 'ticketing', component: TicketingComponent},
