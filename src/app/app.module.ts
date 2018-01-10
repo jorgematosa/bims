@@ -15,6 +15,7 @@ import { PeopleAndProcessesComponent } from './people-and-processes/people-and-p
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { RegisterComponent } from './auth/register/register.component';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
+    AdministrationConsoleComponent,
   ],
   imports: [
     BrowserModule,

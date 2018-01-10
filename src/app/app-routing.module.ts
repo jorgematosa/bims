@@ -1,3 +1,4 @@
+import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { RouterModule } from '@angular/router';
 const appRoutes: Routes = [
   // { path: '',  component: HomeComponent},
   { path: '', component: LoginComponent},
+  { path: 'register', component: RegisterComponent}, // nest under AdministrationConsoleModule
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', component: TaskManagerComponent},
   { path: 'ticketing', component: TicketingComponent},
