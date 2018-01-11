@@ -1,3 +1,4 @@
+import { DropDownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -16,6 +17,8 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
+import { TasksComponent } from './task-manager/tasks/tasks.component';
+import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { AdministrationConsoleComponent } from './administration-console/adminis
     LoginComponent,
     RegisterComponent,
     AdministrationConsoleComponent,
+    DropDownDirective,
+    TasksComponent,
+    TasksBoardComponent
   ],
   imports: [
     BrowserModule,

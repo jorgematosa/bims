@@ -1,3 +1,25 @@
-<p>
-  task-manager works!
-</p>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <div class="btn-group" appDropdown >
+        <button type="button" class="btn btn-group-lg dropdown-toggle" >
+          Select Project
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of projects">{{ project }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <br><br>
+    <hr>
+    <div class="col-md-12">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary">Tasks</button>
+        <button type="button" class="btn btn-primary">Kanban Board</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,13 +12,15 @@ import { RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   // { path: '',  component: HomeComponent},
-  { path: '', component: LoginComponent},
+  { path: '', component: LoginComponent}, // temporary - redirect to homecomponet
   { path: 'register', component: RegisterComponent}, // nest under AdministrationConsoleModule
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', component: TaskManagerComponent},
   { path: 'ticketing', component: TicketingComponent},
   { path: 'info-manager', component: InfoManagerComponent},
-  { path: 'people-and-processes', component: PeopleAndProcessesComponent}
+  { path: 'people-and-processes', component: PeopleAndProcessesComponent},
+  // { path: 'user-area', component: PeopleAndProcessesComponent},
+  // { path: 'administration', component: PeopleAndProcessesComponent}
 ];
 
 @NgModule({

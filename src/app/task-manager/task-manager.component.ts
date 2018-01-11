@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-manager.component.css']
 })
 export class TaskManagerComponent implements OnInit {
+  projects = ['XPTO', 'Care', 'Ruth'];
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  selectProject(project: string) {
+    console.log(project);
+  }
 }
