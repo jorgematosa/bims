@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row text-center">
+  <div class="row text-center" style="font-weight: bold">
     <div class="col-md-3 rounded1">
       To Do
     </div>
@@ -14,24 +14,38 @@
     </div>
   </div>
   <div class="row text-center">
-      <div class="col-md-3 rounded2" *ngFor="let item of tasks">
-        <label for="taskname">Task</label>
-        <br>
-        {{item.name}}
-        <br>
-        <label for="taskname">Description</label>
-        <br>
-        {{item.details}}
-      </div>
-      <div class="col-md-3 rounded2">
-        In Progress
-      </div>
-      <div class="col-md-3 rounded2">
-        Done
-      </div>
-      <div class="col-md-3 rounded2">
-        Closed
-      </div>
+    <div class="col-md-3">
+      <span *ngFor="let item of tasks; let i = index;">
+        <div class="col-lg-12 rounded2" *ngIf="item.state==='Open'">
+          <label for="taskname">Task</label>
+          <p>{{item.name}}</p>
+        </div>
+      </span>
     </div>
+    <div class="col-md-3">
+        <span *ngFor="let item of tasks; let i = index;">
+          <div class="col-md-12 rounded2" *ngIf="item.state==='In Progress'">
+            <label for="taskname">Task</label>
+            <p>{{item.name}}</p>
+          </div>
+        </span>
+      </div>
+    <div class="col-md-3">
+        <span *ngFor="let item of tasks; let i = index;">
+          <div class="col-md-12 rounded2" *ngIf="item.state==='Done'">
+            <label for="taskname">Task</label>
+            <p>{{item.name}}</p>
+          </div>
+        </span>
+      </div>
+    <div class="col-md-3">
+        <span *ngFor="let item of tasks; let i = index;">
+          <div class="col-md-12 rounded2" *ngIf="item.state==='Closed'">
+            <label for="taskname">Task</label>
+            <p>{{item.name}}</p>
+          </div>
+        </span>
+      </div>
+  </div>
 </div>
 

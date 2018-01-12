@@ -1,8 +1,17 @@
 .rounded1 {
   border-radius: 10px;
-  background: rgb(168, 168, 168);
+  background: rgb(156, 193, 223);
 }
 .rounded2 {
-  border-radius: 10px;
-  background: rgb(230, 228, 228);
+  border: 1.5px solid rgb(215, 217, 255);
+  padding: 10px;
+  border-radius: 30px 10px;
 }
+.row {
+  width: 100%;
+  max-width: 2000px;
+}
+p {
+  word-wrap: break-word;
+}
+
