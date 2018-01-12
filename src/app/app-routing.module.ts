@@ -1,3 +1,5 @@
+import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
+import { TasksComponent } from './task-manager/tasks/tasks.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
@@ -15,7 +17,10 @@ const appRoutes: Routes = [
   { path: '', component: LoginComponent}, // temporary - redirect to homecomponet
   { path: 'register', component: RegisterComponent}, // nest under AdministrationConsoleModule
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
-  { path: 'task-manager', component: TaskManagerComponent},
+  { path: 'task-manager', component: TaskManagerComponent, children: [
+    { path: 'tasks', component: TasksComponent },
+    { path: 'tasks-board', component: TasksBoardComponent },
+  ]},
   { path: 'ticketing', component: TicketingComponent},
   { path: 'info-manager', component: InfoManagerComponent},
   { path: 'people-and-processes', component: PeopleAndProcessesComponent},

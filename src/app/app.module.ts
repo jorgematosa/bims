@@ -1,3 +1,4 @@
+import { TasksService } from './task-manager/tasks.service';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -44,7 +45,7 @@ import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.comp
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [TasksService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

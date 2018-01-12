@@ -1,3 +1,5 @@
+import { Task } from './../task.model';
+import { TasksService } from './../tasks.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks-board.component.css']
 })
 export class TasksBoardComponent implements OnInit {
+  tasks: Task[];
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
+    this.tasks = this.tasksService.getTasks();
   }
 
 }

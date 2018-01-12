@@ -1,3 +1,37 @@
-<p>
-  tasks-board works!
-</p>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-md-3 rounded1">
+      To Do
+    </div>
+    <div class="col-md-3 rounded1">
+      In Progress
+    </div>
+    <div class="col-md-3 rounded1">
+      Done
+    </div>
+    <div class="col-md-3 rounded1">
+      Closed
+    </div>
+  </div>
+  <div class="row text-center">
+      <div class="col-md-3 rounded2" *ngFor="let item of tasks">
+        <label for="taskname">Task</label>
+        <br>
+        {{item.name}}
+        <br>
+        <label for="taskname">Description</label>
+        <br>
+        {{item.details}}
+      </div>
+      <div class="col-md-3 rounded2">
+        In Progress
+      </div>
+      <div class="col-md-3 rounded2">
+        Done
+      </div>
+      <div class="col-md-3 rounded2">
+        Closed
+      </div>
+    </div>
+</div>
+

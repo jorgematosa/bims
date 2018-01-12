@@ -1,3 +1,5 @@
+import { Task } from './../task.model';
+import { TasksService } from './../tasks.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
+  tasks: Task[];
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
+    this.tasks = this.tasksService.getTasks();
+  }
+
+  onEditTask(id: number) {
+    console.log(id);
   }
 
 }

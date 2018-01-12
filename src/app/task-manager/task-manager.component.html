@@ -17,9 +17,11 @@
     <hr>
     <div class="col-md-12">
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary">Tasks</button>
-        <button type="button" class="btn btn-primary">Kanban Board</button>
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks">Tasks</button>
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks-board">Kanban Board</button>
       </div>
     </div>
   </div>
+  <br><br>
+  <router-outlet></router-outlet>
 </div>
