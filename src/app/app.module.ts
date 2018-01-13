@@ -20,6 +20,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TasksComponent } from './task-manager/tasks/tasks.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
+import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.comp
     AdministrationConsoleComponent,
     DropDownDirective,
     TasksComponent,
-    TasksBoardComponent
+    TasksBoardComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,

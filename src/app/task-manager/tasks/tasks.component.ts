@@ -1,6 +1,10 @@
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-tasks',
@@ -10,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class TasksComponent implements OnInit {
   tasks: Task[];
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.tasks = this.tasksService.getTasks();
@@ -20,4 +24,7 @@ export class TasksComponent implements OnInit {
     console.log(id);
   }
 
+  newTask() {
+    this.router.navigate(['../task-edit'], {relativeTo: this.route});
+  }
 }

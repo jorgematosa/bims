@@ -1,3 +1,4 @@
+import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
 import { TasksComponent } from './task-manager/tasks/tasks.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
   { path: 'task-manager', component: TaskManagerComponent, children: [
     { path: 'tasks', component: TasksComponent },
     { path: 'tasks-board', component: TasksBoardComponent },
+    { path: 'task-edit', component: TaskEditComponent}
   ]},
   { path: 'ticketing', component: TicketingComponent},
   { path: 'info-manager', component: InfoManagerComponent},
