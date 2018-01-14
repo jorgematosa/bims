@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
           <label for="details">Description</label>
-          <input type="text" id="details" formControlName="details" class="form-control" style="height: 100px!important;">
+          <textarea type="text" id="details" formControlName="details" class="form-control" rows="5"></textarea>
         </div>
         <div class="form-group">
           <label for="reporter">Reporter</label>
@@ -18,7 +18,8 @@
           <label for="assignee">Assignee</label>
           <input type="text" id="assignee" formControlName="assignee" class="form-control">
         </div>
-        <button type="submit" class="btn btn-success">Create Task</button>
+        <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">Create Task</button>
+        <!-- <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">{{ editMode ? 'Create Task' : 'Update Task' }}</button>         -->
       </form>
     </div>
   </div>
