@@ -19,9 +19,9 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent}, // nest under AdministrationConsoleModule
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', component: TaskManagerComponent, children: [
-    { path: 'tasks', component: TasksComponent },
-    { path: 'tasks-board', component: TasksBoardComponent },
-    { path: 'task-edit', component: TaskEditComponent}
+    { path: ':pj/tasks', component: TasksComponent },
+    { path: ':pj/tasks-board', component: TasksBoardComponent },
+    { path: ':pj/task-edit', component: TaskEditComponent}
   ]},
   { path: 'ticketing', component: TicketingComponent},
   { path: 'info-manager', component: InfoManagerComponent},

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class TasksService {
+  // declared variables
   private tasks: Task[] = [
     new Task(4,
       'Fazer Xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
@@ -47,8 +48,10 @@ export class TasksService {
   ];
 
   startedEditing = null;
+  projectSelected = -1;
 
 
+  // output and input functions
   getTasks() {
     return this.tasks.slice();
   }
@@ -83,5 +86,9 @@ export class TasksService {
 
   addTask(task: Task) {
     this.tasks.push(task);
+  }
+
+  selectProject(index: number) {
+    this.projectSelected = index;
   }
 }
