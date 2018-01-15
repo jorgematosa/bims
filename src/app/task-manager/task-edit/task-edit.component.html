@@ -18,7 +18,7 @@
           <label for="assignee">Assignee</label>
           <input type="text" id="assignee" formControlName="assignee" class="form-control">
         </div>
-        <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">Create Task</button>
+        <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">{{editedTaskIndex === null ? 'Create Task' : 'Update Task'}}</button>
         <!-- <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">{{ editMode ? 'Create Task' : 'Update Task' }}</button>         -->
       </form>
     </div>

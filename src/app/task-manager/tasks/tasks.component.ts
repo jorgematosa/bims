@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 
-
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -20,8 +19,9 @@ export class TasksComponent implements OnInit {
     this.tasks = this.tasksService.getTasks();
   }
 
-  onEditTask(id: number) {
-    console.log(id);
+  onEditTask(index: number) {
+    this.tasksService.startEditing(index);
+    this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }
 
   newTask() {

@@ -1,3 +1,5 @@
+import { Project } from './project.model';
+import { TasksService } from './tasks.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-manager.component.css']
 })
 export class TaskManagerComponent implements OnInit {
-  projects = ['XPTO', 'Care', 'Ruth'];
+  projects = [];
+  projectSelected = null;
 
-  constructor() { }
+  constructor(private tasksService: TasksService) { }
 
   ngOnInit() {
+    this.projects = this.tasksService.getProjects();
   }
 
-  selectProject(project: string) {
+  selectProject(project: Project) {
     console.log(project);
+    this.projectSelected = project.name;
   }
 }

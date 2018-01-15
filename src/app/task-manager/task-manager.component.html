@@ -3,12 +3,12 @@
     <div class="col-md-12">
       <div class="btn-group" appDropdown >
         <button type="button" class="btn btn-group-lg dropdown-toggle" >
-          Select Project
+          {{ projectSelected ? projectSelected : 'Select Project' }}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
           <li>
-            <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of projects">{{ project }}</a>
+            <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of projects">{{ project.name }}</a>
           </li>
         </ul>
       </div>
@@ -17,8 +17,8 @@
     <hr>
     <div class="col-md-12">
       <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks">Tasks</button>
-        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks-board">Kanban Board</button>
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks" *ngIf="projectSelected">Tasks</button>
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks-board" *ngIf="projectSelected">Kanban Board</button>
       </div>
     </div>
   </div>
