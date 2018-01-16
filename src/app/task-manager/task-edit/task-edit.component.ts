@@ -40,6 +40,12 @@ export class TaskEditComponent implements OnInit {
     this.router.navigate(['../tasks'], {relativeTo: this.route });
   }
 
+  onCancel() {
+    this.editedTaskIndex = null;
+    this.tasksService.stopEditing();
+    this.router.navigate(['../tasks'], {relativeTo: this.route });
+  }
+
   private initForm() {
     if (this.editedTaskIndex !== null) {
       this.task = this.tasksService.getTask(this.editedTaskIndex);

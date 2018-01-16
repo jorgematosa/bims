@@ -48,6 +48,7 @@ export class TasksService {
   ];
 
   startedEditing = null;
+  startedEditingEvent = new Subject<number>();
   projectSelected = -1;
 
 
@@ -71,10 +72,12 @@ export class TasksService {
 
   startEditing(index: number) {
     this.startedEditing = index;
+    this.startedEditingEvent.next(index);
   }
 
   stopEditing() {
     this.startedEditing = null;
+    this.startedEditingEvent.next(null);
   }
 
   updateTask(index: number, task: Task) {

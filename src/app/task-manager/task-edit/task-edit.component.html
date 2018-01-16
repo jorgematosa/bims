@@ -19,7 +19,7 @@
           <input type="text" id="assignee" formControlName="assignee" class="form-control">
         </div>
         <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">{{editedTaskIndex === null ? 'Create Task' : 'Update Task'}}</button>
-        <!-- <button type="submit" class="btn btn-success" [disabled]="!taskEditForm.valid">{{ editMode ? 'Create Task' : 'Update Task' }}</button>         -->
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
       </form>
     </div>
   </div>
