@@ -47,29 +47,29 @@ export class TaskEditComponent implements OnInit {
     }
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['task-manager/tasks']);
+    this.router.navigate(['task-manager/tasks-board']);
   }
 
   onCancel() {
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['task-manager/tasks']);
+    this.router.navigate(['task-manager/tasks-board']);
   }
 
   private initForm() {
     if (this.editedTaskIndex !== null) {
       this.task = this.tasksService.getTask(this.editedTaskIndex);
       this.taskEditForm = new FormGroup({
-        'name': new FormControl(this.task.name),
+        'name': new FormControl(this.task.name, Validators.required),
         'details': new FormControl(this.task.details, Validators.required),
-        'reporter': new FormControl(this.task.reporter),
+        'reporter': new FormControl(this.task.reporter, Validators.required),
         'assignee': new FormControl(this.task.assignee)
       });
     } else {
       this.taskEditForm = new FormGroup({
-        'name': new FormControl(null),
+        'name': new FormControl(null, Validators.required),
         'details': new FormControl(null, Validators.required),
-        'reporter': new FormControl(null),
+        'reporter': new FormControl(null, Validators.required),
         'assignee': new FormControl(null)
       });
     }

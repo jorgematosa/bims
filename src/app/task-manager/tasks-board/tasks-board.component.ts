@@ -1,8 +1,9 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Project } from './../project.model';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 
 
 @Component({
@@ -10,13 +11,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tasks-board.component.html',
   styleUrls: ['./tasks-board.component.css']
 })
-export class TasksBoardComponent implements OnInit {
+export class TasksBoardComponent implements OnInit, OnDestroy, OnChanges {
   tasks: Task[];
   projects: Project[];
   projectSelected: number;
   subscription: Subscription;
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.projectSelected = this.tasksService.projectSelected;
@@ -29,5 +30,15 @@ export class TasksBoardComponent implements OnInit {
     this.projects = this.tasksService.getProjects();
   }
 
+  ngOnChanges() {
+    this.tasks = this.tasksService.getTasks();
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  newTask() {
+    this.router.navigate(['../task-edit'], {relativeTo: this.route});
+  }
 }

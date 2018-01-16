@@ -31,6 +31,7 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
     this.tasks = this.tasksService.getTasks();
     this.projects = this.tasksService.getProjects();
   }
+
   ngOnChanges() {
     this.tasks = this.tasksService.getTasks();
   }
