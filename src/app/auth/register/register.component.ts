@@ -1,3 +1,4 @@
+import { AuthService } from './../auth.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -20,6 +21,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister() {
-    console.log(this.registerForm);
+    this.authService.signupUser(this.registerForm.value.email, this.registerForm.value.password);
   }
 }

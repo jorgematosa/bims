@@ -1,3 +1,5 @@
+import { HttpEvent } from '@angular/common/http';
+import { DataStorageService } from './../../shared/data.storage.service';
 import { Project } from './../project.model';
 import { Router} from '@angular/router';
 import { Task } from './../task.model';
@@ -21,7 +23,7 @@ export class TaskEditComponent implements OnInit {
   projects: Project[];
   projectSelected: number;
 
-  constructor(private tasksService: TasksService, private router: Router) { }
+  constructor(private tasksService: TasksService, private router: Router, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.editedTaskIndex = this.tasksService.startedEditing;
@@ -47,6 +49,14 @@ export class TaskEditComponent implements OnInit {
     }
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
+    //store tasks in backend
+    this.dataStorageService.storeTasks()
+    .subscribe(
+      (response: HttpEvent<Object>) => {
+        console.log(response);
+      }
+    );
+    //navigate away
     this.router.navigate(['task-manager/tasks-board']);
   }
 

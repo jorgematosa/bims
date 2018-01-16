@@ -1,3 +1,6 @@
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { DataStorageService } from './shared/data.storage.service';
+import { AuthService } from './auth/auth.service';
 import { TasksService } from './task-manager/tasks.service';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +24,7 @@ import { AdministrationConsoleComponent } from './administration-console/adminis
 import { TasksComponent } from './task-manager/tasks/tasks.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 @NgModule({
@@ -47,7 +51,12 @@ import { TaskEditComponent } from './task-manager/task-edit/task-edit.component'
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [TasksService],
+  providers: [
+    TasksService,
+    AuthService,
+    DataStorageService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} // executed first
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

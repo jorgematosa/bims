@@ -1,3 +1,4 @@
+import { DataStorageService } from './../shared/data.storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Project } from './project.model';
 import { TasksService } from './tasks.service';
@@ -16,7 +17,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   startedEditing = null;
   subscription: Subscription;
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.projects = this.tasksService.getProjects();
@@ -27,6 +28,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
         this.startedEditing = index;
       }
     );
+    this.dataStorageService.getTasks();
   }
 
   ngOnDestroy() {

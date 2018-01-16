@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data.storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Project } from './../project.model';
 import { Task } from './../task.model';
@@ -19,7 +20,10 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
   projectSelected: number;
   subscription: Subscription;
 
-  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private tasksService: TasksService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.projectSelected = this.tasksService.projectSelected;
