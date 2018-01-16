@@ -1,11 +1,11 @@
 <div class="container-fluid wrapper">
   <div class="row text-right">
     <div class="col-md-11">
-      <button class="btn btn-success" (click)="newTask()">Create New Task</button>
+      <button class="btn btn-success" (click)="newTask()" *ngIf="projectSelected !== -1">Create New Task</button>
     </div>
   </div>
   <br><br>
-  <div class="table table-responsive" align="center">
+  <div class="table table-responsive" align="center" *ngIf="projectSelected !== -1">
       <thead>
         <tr>
             <th>Id</th>
@@ -18,12 +18,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of tasks; let i = index" (click)="onEditTask(i)" style="cursor: pointer;">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.details }}</td>
-          <td>{{ item.reporter }}</td>
-          <td>{{ item.assignee }}</td>
-          <td>{{ item.state }}</td>
+          <ng-container *ngIf="item.project.name === projects[projectSelected].name">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.details }}</td>
+            <td>{{ item.reporter }}</td>
+            <td>{{ item.assignee }}</td>
+            <td>{{ item.state }}</td>
+          </ng-container>
         </tr>
       </tbody>
     </div>

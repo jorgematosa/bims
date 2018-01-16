@@ -1,4 +1,5 @@
-import { Router, ActivatedRoute } from '@angular/router';
+import { Project } from './../project.model';
+import { Router} from '@angular/router';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -17,18 +18,27 @@ export class TaskEditComponent implements OnInit {
   // editMode = true;
   editedTaskIndex = null;
   task: Task;
+  projects: Project[];
+  projectSelected: number;
 
-  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private tasksService: TasksService, private router: Router) { }
 
   ngOnInit() {
     this.editedTaskIndex = this.tasksService.startedEditing;
     this.initForm();
+    this.projects = this.tasksService.getProjects();
+    this.projectSelected = this.tasksService.projectSelected;
   }
 
   onSubmit() {
     const taskForm = this.taskEditForm.value;
     const newTask = new Task(
-      this.tasksService.getTasksLength(), taskForm.name, taskForm.details, taskForm.reporter, taskForm.assignee, 'Open'
+      this.tasksService.getTasksLength(),
+      taskForm.name,
+      taskForm.details,
+      taskForm.reporter,
+      taskForm.assignee,
+      'Open', this.projects[this.projectSelected]
     );
     if (this.tasksService.startedEditing !== null) {
       this.tasksService.updateTask(this.editedTaskIndex, newTask);
@@ -37,13 +47,13 @@ export class TaskEditComponent implements OnInit {
     }
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['../tasks'], {relativeTo: this.route });
+    this.router.navigate(['task-manager/tasks']);
   }
 
   onCancel() {
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['../tasks'], {relativeTo: this.route });
+    this.router.navigate(['task-manager/tasks']);
   }
 
   private initForm() {
@@ -62,7 +72,6 @@ export class TaskEditComponent implements OnInit {
         'reporter': new FormControl(null),
         'assignee': new FormControl(null)
       });
-      console.log(this.editedTaskIndex);
     }
 
   }

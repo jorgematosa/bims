@@ -7,39 +7,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TasksService {
   // declared variables
-  private tasks: Task[] = [
-    new Task(4,
-      'Fazer Xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-      'Assimwwwwwww wwwwwwwwwwwwwwwwww wwwwwwwww wwwwwwwww',
-      'joãowww wwwwwwwww wwwwwwwwwwwww wwwwwwwwwwwwww',
-      'manelwwwww wwwwwwwww wwwwwwwwwww',
-      'Open'),
-    new Task(6,
-      'Fazer Xeeeeeeeeee',
-      'Assimwwwwww wwwwwwwwwwww wwwwwwwwwwwwwwww wwwwwwwww',
-      'joãowwwwwwwwwwwwww wwwwwwwwwwwwww wwwwwwwwwww',
-      'manelwwwww wwwwwwwwwwwwwwww wwww',
-      'In Progress'),
-    new Task(7,
-      'Fazer Xeeeeeeeeee',
-      'Assimwwwww wwwwwwwwwwwwwwwww wwwwwwwwwwwwwwwwwwwww',
-      'joãowwwwwwwwwwwwwwwwww wwwwwwwwwwww wwwwwwwww',
-      'manelwwwwww wwwwwwwwwwwwwwwwwww',
-      'Open'),
-    new Task(8,
-      'Fazer Xeeeeeeeeee',
-      'Assimwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-      'joãowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-      'manelwwwwwwwwwwwwwwwwwwwwwwwww',
-      'Done'),
-    new Task(9,
-      'Fazer Xeeeeeeeeee',
-      'Assimwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-      'joãowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
-      'manelwwwwwwwwwwwwwwwwwwwwwwwww',
-      'Closed')
-  ];
-
   private projects: Project[] = [
     new Project('XPTO', 'First Project'),
     new Project('Care', 'Second Project'),
@@ -47,9 +14,48 @@ export class TasksService {
     new Project('Last', 'Fourth Project')
   ];
 
+  private tasks: Task[] = [
+    new Task(4,
+      'Fazer Xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+      'Assimwwwwwww wwwwwwwwwwwwwwwwww wwwwwwwww wwwwwwwww',
+      'joãowww wwwwwwwww wwwwwwwwwwwww wwwwwwwwwwwwww',
+      'manelwwwww wwwwwwwww wwwwwwwwwww',
+      'Open',
+    this.projects[0]),
+    new Task(6,
+      'Fazer Xeeeeeeeeee',
+      'Assimwwwwww wwwwwwwwwwww wwwwwwwwwwwwwwww wwwwwwwww',
+      'joãowwwwwwwwwwwwww wwwwwwwwwwwwww wwwwwwwwwww',
+      'manelwwwww wwwwwwwwwwwwwwww wwww',
+      'In Progress',
+      this.projects[0]),
+    new Task(7,
+      'Fazer Xeeeeeeeeee',
+      'Assimwwwww wwwwwwwwwwwwwwwww wwwwwwwwwwwwwwwwwwwww',
+      'joãowwwwwwwwwwwwwwwwww wwwwwwwwwwww wwwwwwwww',
+      'manelwwwwww wwwwwwwwwwwwwwwwwww',
+      'Open',
+      this.projects[1]),
+    new Task(8,
+      'Fazer Xeeeeeeeeee',
+      'Assimwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+      'joãowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+      'manelwwwwwwwwwwwwwwwwwwwwwwwww',
+      'Done',
+      this.projects[2]),
+    new Task(9,
+      'Fazer Xeeeeeeeeee',
+      'Assimwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+      'joãowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww',
+      'manelwwwwwwwwwwwwwwwwwwwwwwwww',
+      'Closed',
+      this.projects[1])
+  ];
+
   startedEditing = null;
   startedEditingEvent = new Subject<number>();
   projectSelected = -1;
+  projectSelectedEvent = new Subject<number>();
 
 
   // output and input functions
@@ -93,5 +99,6 @@ export class TasksService {
 
   selectProject(index: number) {
     this.projectSelected = index;
+    this.projectSelectedEvent.next(index);
   }
 }
