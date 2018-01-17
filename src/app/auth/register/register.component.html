@@ -1,5 +1,6 @@
-<div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
       <h2>Register User</h2>
       <hr>
       <form (ngSubmit)="onRegister()" [formGroup]="registerForm">
@@ -7,10 +8,17 @@
             <label for="user">Username</label>
             <input type="user" id="user" formControlName="user" class="form-control">
           </div>
+          <div class="form-group" style="float: center;">
+            <label for="role">Role</label>
+            <select id="role" formControlName="role" class="form-control center-block">
+              <option *ngFor="let role of roles" [value]="role" >{{ role }}</option>
+            </select>
+            <span class="help-block" *ngIf="!registerForm.get('role').valid && registerForm.get('role').touched">You must add the task priority</span>
+          </div>
           <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" formControlName="email" class="form-control">
-            </div>
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control">
+          </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" formControlName="password" class="form-control">
@@ -19,3 +27,4 @@
         </form>
     </div>
   </div>
+</div>

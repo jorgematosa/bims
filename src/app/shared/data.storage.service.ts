@@ -1,3 +1,4 @@
+import { User } from './../auth/user.model';
 import { Task } from './../task-manager/task.model';
 import { TasksService } from './../task-manager/tasks.service';
 import { Injectable } from '@angular/core';
@@ -17,6 +18,13 @@ export class DataStorageService {
 
   storeTasks () { // change the put string to the correspondent firebase backend
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/task-manager/tasks.json', this.taskService.getTasks(), {
+      reportProgress: true,
+    });
+    return this.httpClient.request(req);
+  }
+
+  storeUser () {
+    const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/users.json', this.authService.getUsers(), {
       reportProgress: true,
     });
     return this.httpClient.request(req);

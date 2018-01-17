@@ -1,3 +1,4 @@
+import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
@@ -17,7 +18,6 @@ import { RouterModule } from '@angular/router';
 const appRoutes: Routes = [
   // { path: '',  component: HomeComponent},
   { path: '', component: LoginComponent}, // temporary - redirect to homecomponet
-  { path: 'register', component: RegisterComponent}, // nest under AdministrationConsoleModule
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', component: TaskManagerComponent, children: [
     // { path: ':pj/tasks', component: TasksComponent },
@@ -33,6 +33,9 @@ const appRoutes: Routes = [
   { path: 'people-and-processes', component: PeopleAndProcessesComponent},
   // { path: 'user-area', component: PeopleAndProcessesComponent},
   // { path: 'administration', component: PeopleAndProcessesComponent}
+  { path: 'administrator', component: AdministrationConsoleComponent, children: [
+    { path: 'register', component: RegisterComponent} // nest under AdministrationConsoleModule
+  ]}
 ];
 
 @NgModule({

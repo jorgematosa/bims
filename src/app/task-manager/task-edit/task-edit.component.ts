@@ -52,14 +52,14 @@ export class TaskEditComponent implements OnInit {
     }
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    //store tasks in backend
+    // store tasks in backend
     this.dataStorageService.storeTasks()
     .subscribe(
       (response: HttpEvent<Object>) => {
         console.log(response);
       }
     );
-    //navigate away
+    // navigate away
     this.router.navigate(['task-manager/task-detail']);
   }
 
