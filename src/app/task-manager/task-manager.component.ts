@@ -1,3 +1,5 @@
+import { User } from './../auth/user.model';
+import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data.storage.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Project } from './project.model';
@@ -16,11 +18,15 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   projectSelected = null;
   startedEditing = null;
   subscription: Subscription;
+  loggedUser: User;
 
-  constructor(private tasksService: TasksService, private dataStorageService: DataStorageService) { }
+  constructor(private tasksService: TasksService, private dataStorageService: DataStorageService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.projects = this.tasksService.getProjects();
+    this.loggedUser = this.authService.getLoggedUser();
+    console.log(this.loggedUser);
+    this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
+    console.log(this.projects);
     this.projectSelectedIndex = this.tasksService.projectSelected;
     this.tasksService.selectProject(this.projectSelectedIndex);
     this.subscription = this.tasksService.startedEditingEvent.subscribe(
@@ -39,5 +45,13 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     this.projectSelected = project.name;
     this.projectSelectedIndex = index;
     this.tasksService.selectProject(index);
+  }
+
+  userHasAcess() {
+    if (this.tasksService.roleExists(this.loggedUser.role)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

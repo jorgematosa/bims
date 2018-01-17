@@ -1,3 +1,5 @@
+import { DataStorageService } from './shared/data.storage.service';
+import { AuthService } from './auth/auth.service';
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
 import { OnInit } from '@angular/core';
@@ -9,6 +11,8 @@ import { OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'app';
+
+  constructor(private authService: AuthService, private dataStorageService: DataStorageService) {}
 
   ngOnInit() {
     firebase.initializeApp({

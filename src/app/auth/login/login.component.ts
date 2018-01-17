@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data.storage.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { FormControl } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -23,5 +24,10 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.authService.signinUser(this.loginForm.value.email, this.loginForm.value.password);
+    setTimeout(
+      () => {
+        this.dataStorageService.getUsers(this.loginForm.value.email);
+      }, 1000
+    );
   }
 }

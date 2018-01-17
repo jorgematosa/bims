@@ -32,21 +32,33 @@ export class DataStorageService {
 
   getTasks() { // change the get string to the correspondent firebase backend
     this.httpClient.get<Task[]>('https://bims-3bf9d.firebaseio.com/task-manager/tasks.json', {
-      responseType: 'json'  // response type
+      responseType: 'json'
     })
     .map(
       (tasks) => {
-        for (const task of tasks) {
-          if (!task['ingredients']) {
-            task['ingredients'] = [];
-          }
-        }
         return tasks;
       }
     )
     .subscribe(
       (tasks: Task[]) => {
         this.taskService.setTasks(tasks);
+      }
+    );
+  }
+
+  getUsers(email: string) {
+    this.httpClient.get<User[]>('https://bims-3bf9d.firebaseio.com/users.json', {
+      responseType: 'json'
+    })
+    .map(
+      (users) => {
+        return users;
+      }
+    )
+    .subscribe(
+      (users: User[]) => {
+        this.authService.setUsers(users);
+        this.authService.setLoggedUser(this.authService.getUserbyEmail(email));
       }
     );
   }

@@ -35,8 +35,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.password
     );
 
-    if (this.authService.userExists(user.getUsername())) {
-      if (this.authService.emailExists(user.getEmail())) {
+    if (this.authService.userExists(user.username)) {
+      if (this.authService.emailExists(user.email)) {
         this.authService.addUsers(user);
         this.dataStorageService.storeUser()
         .subscribe(

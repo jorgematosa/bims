@@ -9,10 +9,10 @@ import { Subject } from 'rxjs/Subject';
 export class TasksService {
   // declared variables
   private projects: Project[] = [
-    new Project('XPTO', 'First Project'),
-    new Project('Care', 'Second Project'),
-    new Project('Ruth', 'Third Project'),
-    new Project('Last', 'Fourth Project')
+    new Project('XPTO', 'First Project', ['Administration', 'Human Resources']),
+    new Project('Care', 'Second Project', ['Administration', 'Development']),
+    new Project('Ruth', 'Third Project', ['Administration', 'Marketing']),
+    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'])
   ];
 
   private tasks: Task[];
@@ -34,8 +34,6 @@ export class TasksService {
 
   setTasks(tasks: Task[]) {
     this.tasks = tasks;
-    console.log(tasks);
-    console.log(this.tasks);
   }
 
   getTask(index: number) {
@@ -45,6 +43,17 @@ export class TasksService {
 
   getProjects() {
     return this.projects.slice();
+  }
+
+  getProjectsByRole(role: string) {
+    const projects = this.projects.slice();
+    for (const proj of projects) {
+      if (proj.roleAccess.includes(role)) { // returns true if the project does not exist
+        const index = projects.indexOf(proj);
+        projects.splice(index, 1);
+      }
+    }
+    return projects;
   }
 
   startEditing(index: number) {
@@ -77,5 +86,16 @@ export class TasksService {
 
   taskSelecting(index: number) {
     this.taskSelected = index;
+  }
+
+  roleExists(role: string) {
+    for (const project of this.projects) {
+      for (const roles of project.roleAccess) {
+        if (roles === role) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
