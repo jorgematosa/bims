@@ -19,7 +19,7 @@ export class TaskDetailComponent implements OnInit {
     this.task = this.tasksService.getTask(this.taskSelected);
   }
 
-   onEditTask() {
+  onEditTask() {
     this.tasksService.startEditing(this.taskSelected);
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }

@@ -12,13 +12,22 @@
           <textarea type="text" id="details" formControlName="details" class="form-control" rows="5"></textarea>
           <span class="help-block" *ngIf="!taskEditForm.get('details').valid && taskEditForm.get('details').touched">You must add the task description</span>
         </div>
-        <div class="form-group">
-          <label for="details">Priority</label>
+        <hr>
+        <div class="form-group" style="float: center;">
+          <label for="priority">Priority</label>
           <select id="priority" formControlName="priority" class="form-control center-block">
             <option *ngFor="let opt of priorities" [value]="opt" >{{ opt }}</option>
           </select>
-          <span class="help-block" *ngIf="!taskEditForm.get('priority').valid && taskEditForm.get('priority').touched">You must add the task description</span>
-          </div>
+          <span class="help-block" *ngIf="!taskEditForm.get('priority').valid && taskEditForm.get('priority').touched">You must add the task priority</span>
+        </div>
+        <div class="form-group" style="float: center;">
+          <label for="state">State</label>
+          <select id="state" formControlName="state" class="form-control center-block">
+            <option *ngFor="let opt of states" [value]="opt" >{{ opt }}</option>
+          </select>
+          <span class="help-block" *ngIf="!taskEditForm.get('state').valid && taskEditForm.get('state').touched">You must add the task state</span>
+        </div>
+        <hr>
         <div class="form-group">
           <label for="reporter">Reporter</label>
           <input type="text" id="reporter" formControlName="reporter" class="form-control">

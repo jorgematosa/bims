@@ -49,6 +49,11 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigate(['../task-detail'], {relativeTo: this.route});
   }
 
+  onEditTask(index: number) {
+    this.tasksService.startEditing(index);
+    this.router.navigate(['../task-edit'], {relativeTo: this.route});
+  }
+
   newTask() {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }

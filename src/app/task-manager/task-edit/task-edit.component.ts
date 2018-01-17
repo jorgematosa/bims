@@ -18,6 +18,7 @@ export class TaskEditComponent implements OnInit {
   subscription: Subscription;
   taskEditForm: FormGroup;
   priorities = ['High', 'Medium', 'Low'];
+  states = ['Open', 'In Progress', 'Done', 'Closed'];
   editedTaskIndex = null;
   task: Task;
   projects: Project[];
@@ -41,7 +42,7 @@ export class TaskEditComponent implements OnInit {
       taskForm.priority,
       taskForm.reporter,
       taskForm.assignee,
-      'Open', this.projects[this.projectSelected],
+      taskForm.state, this.projects[this.projectSelected],
 
     );
     if (this.tasksService.startedEditing !== null) {
@@ -75,6 +76,7 @@ export class TaskEditComponent implements OnInit {
         'name': new FormControl(this.task.name, Validators.required),
         'details': new FormControl(this.task.details, Validators.required),
         'priority': new FormControl(this.task.priority, Validators.required),
+        'state': new FormControl(this.task.state, Validators.required),
         'reporter': new FormControl(this.task.reporter, Validators.required),
         'assignee': new FormControl(this.task.assignee)
       });
@@ -83,6 +85,7 @@ export class TaskEditComponent implements OnInit {
         'name': new FormControl(null, Validators.required),
         'details': new FormControl(null, Validators.required),
         'priority': new FormControl('Low', Validators.required),
+        'state': new FormControl('Open', Validators.required),
         'reporter': new FormControl(null, Validators.required),
         'assignee': new FormControl(null)
       });

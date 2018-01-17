@@ -25,8 +25,9 @@
             <td>{{ item.details }}</td>
             <td>{{ item.reporter }}</td>
             <td>{{ item.assignee }}</td>
-            <td>{{ item.state }}</td>
-            <td>{{ item.priority }}</td>
+            <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td>
+            <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td>
+            <td><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
