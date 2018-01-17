@@ -42,6 +42,11 @@ export class TasksBoardComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription.unsubscribe();
   }
 
+  onEditTask(index: number) {
+    this.tasksService.startEditing(index);
+    this.router.navigate(['../task-edit'], {relativeTo: this.route});
+  }
+
   newTask() {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }
