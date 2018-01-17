@@ -57,13 +57,13 @@ export class TaskEditComponent implements OnInit {
       }
     );
     //navigate away
-    this.router.navigate(['task-manager/tasks-board']);
+    this.router.navigate(['task-manager/task-detail']);
   }
 
   onCancel() {
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['task-manager/tasks-board']);
+    this.router.navigate(['task-manager']);
   }
 
   private initForm() {

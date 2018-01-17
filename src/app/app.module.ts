@@ -25,6 +25,7 @@ import { TasksComponent } from './task-manager/tasks/tasks.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     DropDownDirective,
     TasksComponent,
     TasksBoardComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    TaskDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     TasksService,
     AuthService,
     DataStorageService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} // executed first
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

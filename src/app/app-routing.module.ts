@@ -1,3 +1,4 @@
+import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.component';
 import { TasksComponent } from './task-manager/tasks/tasks.component';
@@ -22,8 +23,9 @@ const appRoutes: Routes = [
     // { path: ':pj/tasks', component: TasksComponent },
     // { path: ':pj/tasks-board', component: TasksBoardComponent },
     // { path: ':pj/task-edit', component: TaskEditComponent}
-    { path: 'tasks', component: TasksComponent },
-    { path: 'tasks-board', component: TasksBoardComponent },
+    { path: 'tasks', component: TasksComponent},
+    { path: 'tasks-board', component: TasksBoardComponent},
+    { path: 'task-detail', component: TaskDetailComponent},
     { path: 'task-edit', component: TaskEditComponent}
   ]},
   { path: 'ticketing', component: TicketingComponent},
