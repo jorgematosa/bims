@@ -1,3 +1,5 @@
+import { AuthService } from './../../auth/auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
+  onLogin() {
+    this.router.navigate(['login'], {relativeTo: this.route});
+  }
+
+  userLoggedIn () {
+    return this.authService.getLoggedUser();
+  }
 }

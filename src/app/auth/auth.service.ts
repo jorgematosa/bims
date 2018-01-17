@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   token: string;
   users: User[] = []; // cannot read property 'length' of undefined
-  loggedUser: User;
+  loggedUser: User = null;
 
   constructor(private router: Router) {}
 
@@ -45,6 +45,7 @@ export class AuthService {
   logout() {
     firebase.auth().signOut();
     this.token = null;
+    this.loggedUser = null;
   }
 
   getToken() {

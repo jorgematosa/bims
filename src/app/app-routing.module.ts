@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth-guard.service';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
@@ -16,10 +17,11 @@ import { PreloadAllModules } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
-  // { path: '',  component: HomeComponent},
-  { path: '', component: LoginComponent}, // temporary - redirect to homecomponet
+  { path: '',  component: HomeComponent, children: [
+    { path: 'login', component: LoginComponent}
+  ]},
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
-  { path: 'task-manager', component: TaskManagerComponent, children: [
+  { path: 'task-manager', canActivate: [AuthGuard], component: TaskManagerComponent, children: [
     // { path: ':pj/tasks', component: TasksComponent },
     // { path: ':pj/tasks-board', component: TasksBoardComponent },
     // { path: ':pj/task-edit', component: TaskEditComponent}
@@ -28,12 +30,12 @@ const appRoutes: Routes = [
     { path: 'task-detail', component: TaskDetailComponent},
     { path: 'task-edit', component: TaskEditComponent}
   ]},
-  { path: 'ticketing', component: TicketingComponent},
-  { path: 'info-manager', component: InfoManagerComponent},
-  { path: 'people-and-processes', component: PeopleAndProcessesComponent},
+  { path: 'ticketing', canActivate: [AuthGuard], component: TicketingComponent},
+  { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent},
+  { path: 'people-and-processes', canActivate: [AuthGuard], component: PeopleAndProcessesComponent},
   // { path: 'user-area', component: PeopleAndProcessesComponent},
   // { path: 'administration', component: PeopleAndProcessesComponent}
-  { path: 'administrator', component: AdministrationConsoleComponent, children: [
+  { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
     { path: 'register', component: RegisterComponent} // nest under AdministrationConsoleModule
   ]}
 ];

@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth/auth-guard.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { DataStorageService } from './shared/data.storage.service';
 import { AuthService } from './auth/auth.service';
@@ -56,6 +57,7 @@ import { TaskDetailComponent } from './task-manager/task-detail/task-detail.comp
   providers: [
     TasksService,
     AuthService,
+    AuthGuard,
     DataStorageService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
