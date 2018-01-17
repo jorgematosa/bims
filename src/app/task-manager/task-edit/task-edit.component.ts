@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class TaskEditComponent implements OnInit {
   subscription: Subscription;
   taskEditForm: FormGroup;
-  // editMode = true;
+  priorities = ['High', 'Medium', 'Low'];
   editedTaskIndex = null;
   task: Task;
   projects: Project[];
@@ -35,12 +35,14 @@ export class TaskEditComponent implements OnInit {
   onSubmit() {
     const taskForm = this.taskEditForm.value;
     const newTask = new Task(
-      this.tasksService.getTasksLength(),
+      this.tasksService.getTasksLength() + 1,
       taskForm.name,
       taskForm.details,
+      taskForm.priority,
       taskForm.reporter,
       taskForm.assignee,
-      'Open', this.projects[this.projectSelected]
+      'Open', this.projects[this.projectSelected],
+
     );
     if (this.tasksService.startedEditing !== null) {
       this.tasksService.updateTask(this.editedTaskIndex, newTask);
@@ -72,6 +74,7 @@ export class TaskEditComponent implements OnInit {
       this.taskEditForm = new FormGroup({
         'name': new FormControl(this.task.name, Validators.required),
         'details': new FormControl(this.task.details, Validators.required),
+        'priority': new FormControl(this.task.priority, Validators.required),
         'reporter': new FormControl(this.task.reporter, Validators.required),
         'assignee': new FormControl(this.task.assignee)
       });
@@ -79,6 +82,7 @@ export class TaskEditComponent implements OnInit {
       this.taskEditForm = new FormGroup({
         'name': new FormControl(null, Validators.required),
         'details': new FormControl(null, Validators.required),
+        'priority': new FormControl('Low', Validators.required),
         'reporter': new FormControl(null, Validators.required),
         'assignee': new FormControl(null)
       });

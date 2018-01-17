@@ -60,6 +60,7 @@ export class TasksService {
   updateTask(index: number, task: Task) {
     this.tasks[index].name = task.name;
     this.tasks[index].details = task.details;
+    this.tasks[index].priority = task.priority;
     this.tasks[index].reporter = task.reporter;
     this.tasks[index].assignee = task.assignee;
   }

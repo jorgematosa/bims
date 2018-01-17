@@ -12,6 +12,7 @@
         <div class="col-lg-12 rounded2" *ngIf="item.state==='Open' && (item.project.name === projects[projectSelected].name)">
           <!-- <label for="taskname">Task</label> -->
           <p>{{item.name}}</p>
+          <p>Priority: <span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{item.priority}}</span></p>
         </div>
       </span>
     </div>
@@ -21,6 +22,7 @@
         <div class="col-md-12 rounded2" *ngIf="item.state==='In Progress' && (item.project.name === projects[projectSelected].name)">
           <!-- <label for="taskname">Task</label> -->
           <p>{{item.name}}</p>
+          <p>Priority: <span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{item.priority}}</span></p>
         </div>
       </span>
     </div>
@@ -30,6 +32,7 @@
         <div class="col-md-12 rounded2" *ngIf="item.state==='Done' && (item.project.name === projects[projectSelected].name)">
           <!-- <label for="taskname">Task</label> -->
           <p>{{item.name}}</p>
+          <p>Priority: <span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{item.priority}}</span></p>
         </div>
       </span>
     </div>
@@ -39,6 +42,7 @@
         <div class="col-md-12 rounded2" *ngIf="item.state==='Closed' && (item.project.name === projects[projectSelected].name)">
           <!-- <label for="taskname">Task</label> -->
           <p>{{item.name}}</p>
+          <p>Priority: <span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{item.priority}}</span></p>
         </div>
       </span>
     </div>
