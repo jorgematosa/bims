@@ -37,7 +37,6 @@ export class TasksService {
   }
 
   getTask(index: number) {
-    console.log(this.tasks[index]);
     return this.tasks[index];
   }
 

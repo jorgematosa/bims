@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { User } from './../auth/user.model';
 import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data.storage.service';
@@ -6,6 +7,7 @@ import { Project } from './project.model';
 import { TasksService } from './tasks.service';
 import { Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
+import { Data } from '@angular/router/src/config';
 
 @Component({
   selector: 'app-task-manager',
@@ -20,13 +22,16 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   loggedUser: User;
 
-  constructor(private tasksService: TasksService, private dataStorageService: DataStorageService, private authService: AuthService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private tasksService: TasksService,
+    private dataStorageService: DataStorageService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.loggedUser = this.authService.getLoggedUser();
-    console.log(this.loggedUser);
     this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
-    console.log(this.projects);
     this.projectSelectedIndex = this.tasksService.projectSelected;
     this.tasksService.selectProject(this.projectSelectedIndex);
     this.subscription = this.tasksService.startedEditingEvent.subscribe(
@@ -45,6 +50,11 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     this.projectSelected = project.name;
     this.projectSelectedIndex = index;
     this.tasksService.selectProject(index);
+
+    // checking the route
+    if (this.router.url === '/task-manager') {
+      this.router.navigate(['tasks'], {relativeTo: this.route});
+    }
   }
 
   userHasAcess() {
