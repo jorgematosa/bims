@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     setTimeout(
       () => {
         this.dataStorageService.getUsers(this.loginForm.value.email);
-      }, 1000
+      }, 1200
     );
   }
 }

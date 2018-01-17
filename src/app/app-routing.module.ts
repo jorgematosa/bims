@@ -37,7 +37,8 @@ const appRoutes: Routes = [
   // { path: 'administration', component: PeopleAndProcessesComponent}
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
     { path: 'register', component: RegisterComponent} // nest under AdministrationConsoleModule
-  ]}
+  ]},
+  { path: '**', redirectTo: '/'}
 ];
 
 @NgModule({
