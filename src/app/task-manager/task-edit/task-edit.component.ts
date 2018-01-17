@@ -63,7 +63,7 @@ export class TaskEditComponent implements OnInit {
   onCancel() {
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
-    this.router.navigate(['task-manager']);
+    this.router.navigate(['task-manager/tasks']);
   }
 
   private initForm() {
