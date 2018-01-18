@@ -58,6 +58,7 @@ export class DataStorageService {
     .subscribe(
       (users: User[]) => {
         this.authService.setUsers(users);
+        console.log(users);
         this.authService.setLoggedUser(this.authService.getUserbyEmail(email));
       }
     );

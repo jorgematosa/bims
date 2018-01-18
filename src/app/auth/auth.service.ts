@@ -35,6 +35,7 @@ export class AuthService {
           .then(
             (token: string) => {
               this.token = token;
+              console.log('Token gerado: ' + token);
             }
           );
           setTimeout(
