@@ -47,18 +47,19 @@ export class TasksService {
   getProjectsByRole(role: string) {
     const projects = this.projects.slice();
     const remIndex: number[] = [];
+
+    // gets the index of the items to be removed
     for (const item of projects) {
-      console.log('loop');
       if (!item.roleAccess.includes(role)) {
-        console.log('ENTROU');
         remIndex.push(projects.indexOf(item));
       }
     }
 
+    // removes the items
     for (let i = remIndex.length - 1; i >= 0; i--) {
       projects.splice(remIndex[i], 1);
     }
-    console.log(projects);
+
     return projects;
   }
 
