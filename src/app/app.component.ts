@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   verifyToken() {
     // persistent login
     const tokenKey = Object.keys(window.localStorage)
-    .filter(it => it.startsWith('firebase:authUser'))[0];
+    .filter(it => it.startsWith('firebase:authUser'))[1];
     const authToken = JSON.parse(localStorage.getItem(tokenKey)).stsTokenManager.accessToken;
     this.authService.token = authToken;
     console.log(this.authService.isAuthenticated());
@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
         firebase.auth().currentUser.getIdToken()
           .then(
             (token: string) => {
-              this.authService.token = token;
+              // this.authService.token = token;
               console.log('token novo');
               console.log(token);
             }
