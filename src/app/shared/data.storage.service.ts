@@ -23,7 +23,7 @@ export class DataStorageService {
     return this.httpClient.request(req);
   }
 
-  storeUser () {
+  storeUsers () {
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/users.json', this.authService.getUsers(), {
       reportProgress: true,
     });

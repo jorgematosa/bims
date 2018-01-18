@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { DataStorageService } from './../shared/data.storage.service';
 import { User } from './user.model';
 import * as firebase from 'firebase';
@@ -9,6 +10,8 @@ export class AuthService {
   token: string;
   users: User[] = []; // cannot read property 'length' of undefined
   loggedUser: User = null;
+  updatingUser = false;
+  updatingUserSub = new Subject<boolean>();
 
   constructor(private router: Router) {}
 
@@ -16,7 +19,7 @@ export class AuthService {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(
       response => {
-        this.router.navigate(['/task-manager']); // navigate away
+        this.router.navigate(['/']); // navigate away
       }
     )
     .catch(
@@ -28,12 +31,16 @@ export class AuthService {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(
       response => {
-        this.router.navigate(['/']), // navigate away, change when app is complete
         firebase.auth().currentUser.getIdToken()
           .then(
             (token: string) => {
               this.token = token;
             }
+          );
+          setTimeout(
+            () => {
+              this.router.navigate(['/']); // navigate away, change when app is complete
+            }, 1200
           );
       } // catch the response to the action
     )
@@ -85,8 +92,37 @@ export class AuthService {
     return null;
   }
 
+  public getUserIndexbyEmail(email: string) {
+    let flag = null;
+    this.users.forEach(
+      (user, index) => {
+        if (user.email === email) {
+          flag = index;
+        }
+      }
+    );
+    return flag;
+  }
+
   addUsers(user: User) {
     this.users.push(user);
+  }
+
+  updateUser(index: number, user: User) {
+    const user_fire = firebase.auth().currentUser;
+
+    this.users[index] = user;
+    console.log(this.users);
+
+    user_fire.updateEmail(user.email).then(function() {
+    }).catch(function(error) {
+    });
+
+    user_fire.updatePassword(user.password).then(function() {
+    }).catch(function(error) {
+});
+    this.router.navigate(['/']); // navigate away
+    console.log('The user was updated');
   }
 
   userExists(username: string) {
