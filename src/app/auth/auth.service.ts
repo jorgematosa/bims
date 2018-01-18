@@ -35,7 +35,6 @@ export class AuthService {
           .then(
             (token: string) => {
               this.token = token;
-              console.log('Token gerado: ' + token);
             }
           );
           setTimeout(
@@ -113,7 +112,6 @@ export class AuthService {
     const user_fire = firebase.auth().currentUser;
 
     this.users[index] = user;
-    console.log(this.users);
 
     user_fire.updateEmail(user.email).then(function() {
     }).catch(function(error) {

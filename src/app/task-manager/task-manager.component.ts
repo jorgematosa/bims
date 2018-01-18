@@ -30,16 +30,21 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.loggedUser = this.authService.getLoggedUser();
-    this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
-    this.projectSelectedIndex = this.tasksService.projectSelected;
-    this.tasksService.selectProject(this.projectSelectedIndex);
-    this.subscription = this.tasksService.startedEditingEvent.subscribe(
-      (index: number) => {
-        this.startedEditing = index;
-      }
+    setTimeout(
+      () => {
+        this.loggedUser = this.authService.getLoggedUser();
+        this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
+        this.projectSelectedIndex = this.tasksService.projectSelected;
+        this.tasksService.selectProject(this.projectSelectedIndex);
+        this.subscription = this.tasksService.startedEditingEvent.subscribe(
+          (index: number) => {
+            this.startedEditing = index;
+          }
+        );
+        this.dataStorageService.getTasks();
+      }, 1400
     );
-    this.dataStorageService.getTasks();
+
   }
 
   ngOnDestroy() {
