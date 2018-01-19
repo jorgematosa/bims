@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['login'], {relativeTo: this.route});
   }
 
-  userLoggedIn () {
-    return this.authService.getLoggedUser();
+  isAuthenticated () {
+    return this.authService.isAuthenticated();
   }
 }

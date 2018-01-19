@@ -1,3 +1,4 @@
+import { LoadingGuard } from './task-manager/loading.guard';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
@@ -21,7 +22,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent}
   ]},
   // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
-  { path: 'task-manager', canActivate: [AuthGuard], component: TaskManagerComponent, children: [
+  { path: 'task-manager', canActivate: [LoadingGuard], component: TaskManagerComponent, children: [
     // { path: ':pj/tasks', component: TasksComponent },
     // { path: ':pj/tasks-board', component: TasksBoardComponent },
     // { path: ':pj/task-edit', component: TaskEditComponent}

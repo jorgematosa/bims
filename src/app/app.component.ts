@@ -1,3 +1,4 @@
+import { TasksService } from './task-manager/tasks.service';
 import { User } from './auth/user.model';
 import { DataStorageService } from './shared/data.storage.service';
 import { AuthService } from './auth/auth.service';
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     });
 
     this.verifyToken();
+
   }
 
   verifyToken() {

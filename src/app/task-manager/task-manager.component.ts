@@ -15,7 +15,7 @@ import { Data } from '@angular/router/src/config';
   styleUrls: ['./task-manager.component.css']
 })
 export class TaskManagerComponent implements OnInit, OnDestroy {
-  projects = [];
+  projects = null;
   projectSelectedIndex = -1;
   projectSelected = null;
   startedEditing = null;
