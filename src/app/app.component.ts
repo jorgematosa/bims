@@ -45,7 +45,5 @@ export class AppComponent implements OnInit {
         this.dataStorageService.getUsers(this.loggedUserEmail);
       }, 1200
     );
-
-    // test
   }
 }

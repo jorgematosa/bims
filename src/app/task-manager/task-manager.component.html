@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <div class="row text-center">
     <div class="col-md-12">
-      <div class="btn-group" appDropdown >
+      <h3 *ngIf="!isLoaded()">Loading</h3>
+      <div class="btn-group" appDropdown *ngIf="isLoaded()">
         <button type="button" class="btn btn-group-lg dropdown-toggle" >
           {{ projectSelected ? projectSelected : 'Select Project' }}
           <span class="caret"></span>

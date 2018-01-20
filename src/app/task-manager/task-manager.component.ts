@@ -20,7 +20,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   projectSelected = null;
   startedEditing = null;
   subscription: Subscription;
-  loggedUser: User;
+  loggedUser: User = null;
 
   constructor(
     private router: Router,
@@ -49,6 +49,14 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  isLoaded() {
+    if (this.loggedUser !== null && this.projects !== null ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   selectProject(project: Project, index: number) {
