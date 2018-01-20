@@ -8,10 +8,12 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
   token: string;
+
   users: User[] = []; // cannot read property 'length' of undefined
   loggedUser: User = null;
   updatingUser = false;
   updatingUserSub = new Subject<boolean>();
+  usersLoaded = new Subject<boolean>();
 
   constructor(private router: Router) {}
 
@@ -53,6 +55,7 @@ export class AuthService {
     firebase.auth().signOut();
     this.token = null;
     this.loggedUser = null;
+    this.usersLoaded.next(false);
   }
 
   getToken() {

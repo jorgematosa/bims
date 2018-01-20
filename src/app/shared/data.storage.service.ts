@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 import { HttpRequest } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http/src/response';
 
 
 @Injectable()
@@ -59,7 +60,11 @@ export class DataStorageService {
       (users: User[]) => {
         this.authService.setUsers(users);
         this.authService.setLoggedUser(this.authService.getUserbyEmail(email));
-        console.log(this.authService.loggedUser);
+        this.authService.usersLoaded.next(true);
+      },
+      error => {
+        this.authService.token = null;
+        this.authService.usersLoaded.next(false);
       }
     );
   }
