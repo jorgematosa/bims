@@ -95,6 +95,10 @@ export class TasksService {
     this.taskSelected = index;
   }
 
+  createdTaskSelecting() {
+    this.taskSelected = this.tasks.length - 1;
+  }
+
   roleExists(role: string) {
     for (const project of this.projects) {
       for (const roles of project.roleAccess) {

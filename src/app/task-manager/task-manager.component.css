@@ -1,0 +1,6 @@
+select {
+  max-width: 200px;
+  float: center;
+  text-align: center;
+  text-align-last: center;
+}

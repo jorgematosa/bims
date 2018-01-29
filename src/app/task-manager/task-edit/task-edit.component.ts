@@ -49,6 +49,8 @@ export class TaskEditComponent implements OnInit {
       this.tasksService.updateTask(this.editedTaskIndex, newTask);
     } else {
       this.tasksService.addTask(newTask);
+      // select created task
+      this.tasksService.createdTaskSelecting();
     }
     this.editedTaskIndex = null;
     this.tasksService.stopEditing();
@@ -59,7 +61,7 @@ export class TaskEditComponent implements OnInit {
         console.log(response);
       }
     );
-    // navigate away
+        // navigate away
     this.router.navigate(['task-manager/task-detail']);
   }
 

@@ -4,6 +4,7 @@ import { User } from './user.model';
 import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +14,8 @@ export class AuthService {
   loggedUser: User = null;
   updatingUser = false;
   updatingUserSub = new Subject<boolean>();
-  usersLoaded = new Subject<boolean>();
+  // usersLoaded = new Subject<boolean>();
+  usersLoaded: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router) {}
 

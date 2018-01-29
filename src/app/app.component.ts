@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
       setTimeout(
         () => {
           this.dataStorageService.getUsers(this.loggedUserEmail);
-          console.log(this.authService.token);
         }, 1200
       );
     } else {

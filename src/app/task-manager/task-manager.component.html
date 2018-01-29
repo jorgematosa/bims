@@ -2,6 +2,7 @@
   <div class="row text-center">
     <div class="col-md-12">
       <h3 *ngIf="!isLoaded()">Loading</h3>
+
       <div class="btn-group" appDropdown *ngIf="isLoaded()">
         <button type="button" class="btn btn-group-lg dropdown-toggle" >
           {{ projectSelected ? projectSelected : 'Select Project' }}
@@ -14,6 +15,11 @@
         </ul>
       </div>
     </div>
+      <!-- <select class="form-control selcls center-block" id="sel1" *ngIf="isLoaded()">
+        <option>{{ projectSelected ? projectSelected : '-- Select a Project --' }}</option>
+        <option (click)="selectProject(project, i)" style="cursor: pointer;" *ngFor="let project of projects; let i = index">{{ project.name }}</option>
+      </select> -->
+
     <br><br>
     <hr>
     <div class="col-md-12" *ngIf="projectSelected && (startedEditing === null)">
