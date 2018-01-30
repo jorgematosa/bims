@@ -1,0 +1,9 @@
+.btn-group {
+  margin-top: 200px;
+}
+
+.btn.btn-primary {
+  /* width: 200px; */
+  /* height: 200px; */
+  font-size: 50px;
+}

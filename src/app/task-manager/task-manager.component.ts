@@ -42,7 +42,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
           }
         );
         this.dataStorageService.getTasks();
-      }, 1400
+      }, 1600 // alterar o timeout conforme a necessidade
     );
 
   }
@@ -70,11 +70,11 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  userHasAcess() {
-    if (this.tasksService.roleExists(this.loggedUser.role)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // userHasAcess() {
+  //   if (this.tasksService.roleExists(this.loggedUser.role)) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }

@@ -27,6 +27,9 @@ import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.comp
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
+import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketing.component';
+import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
+import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 
 
 @NgModule({
@@ -46,7 +49,10 @@ import { TaskDetailComponent } from './task-manager/task-detail/task-detail.comp
     TasksComponent,
     TasksBoardComponent,
     TaskEditComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    HomeTicketingComponent,
+    TicketsExplorerComponent,
+    TicketEditComponent
   ],
   imports: [
     BrowserModule,

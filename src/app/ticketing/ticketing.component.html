@@ -1,3 +1,16 @@
-<p>
-  ticketing works!
-</p>
+<div class="container-fluid">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h3 *ngIf="!isLoaded()">Loading</h3>
+    </div>
+    <div class="col-md-12" *ngIf="isLoaded()">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks" >Search Tickets</button>
+        <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks-board">Create Ticket</button>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <br><br>
+  <router-outlet></router-outlet>
+</div>
