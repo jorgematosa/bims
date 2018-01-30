@@ -1,9 +1,8 @@
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">BIMS</a>
     </div>
-
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active" ><a routerLink="/task-manager" >Task Manager</a></li>
@@ -15,16 +14,57 @@
         <li><a routerLink="" (click)="onLogout()">Logout</a></li>
         <li routerLinkActive="active" ><a routerLink="" >User Area</a></li>
         <li routerLinkActive="active" ><a routerLink="/administrator" >Administration</a></li>
-        <!-- <ng-template [ngIf]="!isAuthenticated()"> -->
-        <!-- <li><a style="cursor: pointer;" (click)="onLogout()" *ngIf="isAuthenticated()">Logout</a></li>
-        <li class="dropdown" appDropdown *ngIf="isAuthenticated()">
-          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
-            <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
-          </ul>
-        </li> -->
       </ul>
     </div>
-  </div>
+  </div> -->
 
+
+  <!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a routerLink="/" class="navbar-brand">BIMS</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active"><a routerLink="/task-manager">Home</a></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active"><a routerLink="/ticketing">Ticketing</a></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active"><a routerLink="/info-manager">Info Manager</a></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLinkActive="active"><a routerLink="/people-and-processes">People and Processes</a></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-sm-2">
+        <li><a routerLink="" (click)="onLogout()">Logout</a></li>
+        <li routerLinkActive="active" ><a routerLink="" >User Area</a></li>
+        <li routerLinkActive="active" ><a routerLink="/administrator" >Administration</a></li>
+      </ul>
+    </div>
+  </nav> -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">BIMS</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/task-manager">Task Manager</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/ticketing">Ticketing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/info-manager">Info Manager</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/people-and-processes">People and Processes</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav mr-sm2">
+        <a class="nav-link" routerLink="" (click)="onLogout()">Logout</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="">User Area</a>
+        <a class="nav-link" routerLinkActive="active" routerLink="/administrator">Administration</a>
+      </ul>
+    </div>
+  </nav>

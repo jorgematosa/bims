@@ -1,3 +1,7 @@
+import { TicketingGuard } from './ticketing/access-guard.service';
+import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
+import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
+import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketing.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
@@ -30,7 +34,11 @@ const appRoutes: Routes = [
     { path: 'task-detail', component: TaskDetailComponent},
     { path: 'task-edit', component: TaskEditComponent}
   ]},
-  { path: 'ticketing', canActivate: [AuthGuard], component: TicketingComponent},
+  { path: 'ticketing', canActivate: [AuthGuard], component: TicketingComponent, children: [
+    { path: 'ticketing-options', component: HomeTicketingComponent},
+    { path: 'tickets-explorer', component: TicketsExplorerComponent},
+    { path: 'ticket-edit', component: TicketEditComponent}
+  ]},
   { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent},
   { path: 'people-and-processes', canActivate: [AuthGuard], component: PeopleAndProcessesComponent},
   // { path: 'user-area', component: PeopleAndProcessesComponent},

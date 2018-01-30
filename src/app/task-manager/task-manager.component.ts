@@ -21,6 +21,7 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
   startedEditing = null;
   subscription: Subscription;
   loggedUser: User = null;
+  usersSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -30,25 +31,29 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit() {
-    setTimeout(
-      () => {
-        this.loggedUser = this.authService.getLoggedUser();
-        this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
-        this.projectSelectedIndex = this.tasksService.projectSelected;
-        this.tasksService.selectProject(this.projectSelectedIndex);
-        this.subscription = this.tasksService.startedEditingEvent.subscribe(
-          (index: number) => {
-            this.startedEditing = index;
-          }
-        );
-        this.dataStorageService.getTasks();
-      }, 1600 // alterar o timeout conforme a necessidade
+    this.usersSubscription = this.authService.usersLoaded.subscribe(
+      (flag: boolean) => {
+        if (flag === true) {
+          this.loggedUser = this.authService.getLoggedUser();
+          this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
+          this.projectSelectedIndex = this.tasksService.projectSelected;
+          this.tasksService.selectProject(this.projectSelectedIndex);
+          this.dataStorageService.getTasks();
+        }
+      }
+    );
+
+    this.subscription = this.tasksService.startedEditingEvent.subscribe(
+      (index: number) => {
+        this.startedEditing = index;
+      }
     );
 
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.usersSubscription.unsubscribe();
   }
 
   isLoaded() {

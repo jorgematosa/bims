@@ -17,6 +17,7 @@ export class TicketingComponent implements OnInit, OnDestroy {
   projectSelected = null;
   startedEditing = null;
   subscription: Subscription;
+  usersSubscription: Subscription;
   loggedUser: User = null;
 
   constructor(
@@ -27,25 +28,27 @@ export class TicketingComponent implements OnInit, OnDestroy {
     private authService: AuthService) { }
 
   ngOnInit() {
-    setTimeout(
-      () => {
-        this.loggedUser = this.authService.getLoggedUser();
-        this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
-        // this.projectSelectedIndex = this.tasksService.projectSelected;
-        // this.tasksService.selectProject(this.projectSelectedIndex);
-      //   this.subscription = this.tasksService.startedEditingEvent.subscribe(
-      //     (index: number) => {
-      //       this.startedEditing = index;
-      //     }
-      //   );
-      //   this.dataStorageService.getTasks();
-       }, 1600
+    this.usersSubscription = this.authService.usersLoaded.subscribe(
+      (flag: boolean) => {
+        if (flag === true) {
+          this.loggedUser = this.authService.getLoggedUser();
+          this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
+          this.router.navigate(['ticketing-options'], {relativeTo: this.route});
+        }
+      }
+    );
+
+    this.subscription = this.tasksService.startedEditingEvent.subscribe(
+      (index: number) => {
+        this.startedEditing = index;
+      }
     );
 
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.usersSubscription.unsubscribe();
   }
 
   isLoaded() {
