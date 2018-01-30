@@ -12,9 +12,7 @@
           <a (click)="selectProject(project, i)" style="cursor: pointer;" *ngFor="let project of projects; let i = index"><p>{{ project.name }}</p></a>
         </div>
       </div>
-
     </div>
-    <br><br>
     <hr>
     <div class="col-md-12" *ngIf="projectSelected && (startedEditing === null)">
       <div class="btn-group" role="group">
