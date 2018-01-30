@@ -11,3 +11,10 @@ select {
   text-align-last: center;
 }
 
+.container {
+  max-width: 500px;
+}
+
+#selects {
+  display: inline-flex;
+}
