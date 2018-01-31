@@ -10,3 +10,17 @@
   width: 15%;
   text-align: center;
 }
+
+#projects {
+  color: white;
+  font-weight: bold;
+}
+
+.btn-circle {
+  border-radius: 50%;
+}
+
+h5 {
+  color: rgb(94, 217, 226);
+}
+

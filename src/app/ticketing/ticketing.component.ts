@@ -1,9 +1,11 @@
+import { TicketingService } from './ticketing.service';
+import { ProjectsService } from './../shared/projects.service';
 import { TasksService } from './../task-manager/tasks.service';
 import { AuthService } from './../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../auth/user.model';
 import { Subscription } from 'rxjs/Subscription';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { DataStorageService } from '../shared/data.storage.service';
 
 @Component({
@@ -11,64 +13,57 @@ import { DataStorageService } from '../shared/data.storage.service';
   templateUrl: './ticketing.component.html',
   styleUrls: ['./ticketing.component.css']
 })
-export class TicketingComponent implements OnInit, OnDestroy {
-  projects = null;
-  projectSelectedIndex = -1;
-  projectSelected = null;
-  startedEditing = null;
+export class TicketingComponent implements OnInit, OnDestroy{
   subscription: Subscription;
-  usersSubscription: Subscription;
+  homeSubscription: Subscription;
   loggedUser: User = null;
+  home: boolean;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private tasksService: TasksService,
-    private dataStorageService: DataStorageService,
-    private authService: AuthService) { }
+    private projectsService: ProjectsService,
+    private authService: AuthService,
+    private ticketingService: TicketingService) { }
 
   ngOnInit() {
-    this.usersSubscription = this.authService.usersLoaded.subscribe(
+    this.subscription = this.authService.usersLoaded.subscribe(
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
-          this.router.navigate(['ticketing-options'], {relativeTo: this.route});
+          // this.router.navigate(['ticketing-options'], {relativeTo: this.route});
         }
       }
     );
 
-    this.subscription = this.tasksService.startedEditingEvent.subscribe(
-      (index: number) => {
-        this.startedEditing = index;
+    this.homeSubscription = this.ticketingService.home.subscribe(
+      (flag: boolean) => {
+        this.home = flag;
+        console.log(this.home);
       }
     );
-
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.usersSubscription.unsubscribe();
+    this.homeSubscription.unsubscribe();
   }
 
   isLoaded() {
-    if (this.loggedUser !== null && this.projects !== null ) {
+    if (this.loggedUser !== null) {
       return true;
     } else {
       return false;
     }
   }
 
-  // selectProject(project: Project, index: number) {
-  //   this.projectSelected = project.name;
-  //   this.projectSelectedIndex = index;
-  //   this.tasksService.selectProject(index);
+  onSearchTickets() {
+    this.ticketingService.home.next(false);
+    this.router.navigate(['./tickets-explorer'], {relativeTo: this.route});
+  }
 
-  //   // checking the route
-  //   if (this.router.url === '/task-manager') {
-  //     this.router.navigate(['tasks'], {relativeTo: this.route});
-  //   }
-  // }
-
-
+  onCreateTicket() {
+    this.ticketingService.home.next(false);
+    this.router.navigate(['./ticket-edit'], {relativeTo: this.route});
+  }
 }

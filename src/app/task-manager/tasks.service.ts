@@ -1,5 +1,6 @@
+import { ProjectsService } from './../shared/projects.service';
+import { Project } from './../shared/project.model';
 import { DataStorageService } from './../shared/data.storage.service';
-import { Project } from './project.model';
 import { Task } from './task.model';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
@@ -8,12 +9,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TasksService {
   // declared variables
-  private projects: Project[] = [
-    new Project('XPTO', 'First Project', ['Administration', 'Human Resources']),
-    new Project('Care', 'Second Project', ['Administration', 'Development']),
-    new Project('Ruth', 'Third Project', ['Administration', 'Marketing']),
-    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'])
-  ];
 
   private tasks: Task[];
 
@@ -22,6 +17,8 @@ export class TasksService {
   projectSelected = -1;
   projectSelectedEvent = new Subject<number>();
   taskSelected = -1;
+
+  constructor(private projectsService: ProjectsService) {}
 
   // output and input functions
   getTasks() {
@@ -38,29 +35,6 @@ export class TasksService {
 
   getTask(index: number) {
     return this.tasks[index];
-  }
-
-  getProjects() {
-    return this.projects.slice();
-  }
-
-  getProjectsByRole(role: string) {
-    const projects = this.projects.slice();
-    const remIndex: number[] = [];
-
-    // gets the index of the items to be removed
-    for (const item of projects) {
-      if (!item.roleAccess.includes(role)) {
-        remIndex.push(projects.indexOf(item));
-      }
-    }
-
-    // removes the items
-    for (let i = remIndex.length - 1; i >= 0; i--) {
-      projects.splice(remIndex[i], 1);
-    }
-
-    return projects;
   }
 
   startEditing(index: number) {
@@ -100,7 +74,8 @@ export class TasksService {
   }
 
   roleExists(role: string) {
-    for (const project of this.projects) {
+    const projects = this.projectsService.getProjects();
+    for (const project of projects) {
       for (const roles of project.roleAccess) {
         if (roles === role) {
           return true;

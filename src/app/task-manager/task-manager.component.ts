@@ -1,9 +1,10 @@
+import { Project } from './../shared/project.model';
+import { ProjectsService } from './../shared/projects.service';
 import { Router, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { User } from './../auth/user.model';
 import { AuthService } from './../auth/auth.service';
 import { DataStorageService } from './../shared/data.storage.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Project } from './project.model';
 import { TasksService } from './tasks.service';
 import { Component, OnInit } from '@angular/core';
 import { OnDestroy } from '@angular/core';
@@ -28,14 +29,15 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private tasksService: TasksService,
     private dataStorageService: DataStorageService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private projectsService: ProjectsService) { }
 
   ngOnInit() {
     this.usersSubscription = this.authService.usersLoaded.subscribe(
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          this.projects = this.tasksService.getProjectsByRole(this.loggedUser.role);
+          this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
           this.projectSelectedIndex = this.tasksService.projectSelected;
           this.tasksService.selectProject(this.projectSelectedIndex);
           this.dataStorageService.getTasks();
@@ -75,11 +77,4 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     }
   }
 
-  // userHasAcess() {
-  //   if (this.tasksService.roleExists(this.loggedUser.role)) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
 }

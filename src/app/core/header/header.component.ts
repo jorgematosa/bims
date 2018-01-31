@@ -1,3 +1,4 @@
+import { TicketingService } from './../../ticketing/ticketing.service';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private ticketingService: TicketingService) { }
 
   ngOnInit() {
   }
@@ -17,4 +18,7 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
+  onHome() {
+    this.ticketingService.home.next(true);
+  }
 }

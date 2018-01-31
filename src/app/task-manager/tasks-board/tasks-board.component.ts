@@ -1,7 +1,8 @@
+import { ProjectsService } from './../../shared/projects.service';
 import { DataStorageService } from './../../shared/data.storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { Project } from './../project.model';
+import { Project } from './../../shared/project.model';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
@@ -20,6 +21,7 @@ export class TasksBoardComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private tasksService: TasksService,
+    private projectsService: ProjectsService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -31,7 +33,7 @@ export class TasksBoardComponent implements OnInit, OnDestroy, OnChanges {
       }
     );
     this.tasks = this.tasksService.getTasks();
-    this.projects = this.tasksService.getProjects();
+    this.projects = this.projectsService.getProjects();
   }
 
   ngOnChanges() {

@@ -1,3 +1,5 @@
+import { TicketingService } from './ticketing/ticketing.service';
+import { ProjectsService } from './shared/projects.service';
 import { TicketingGuard } from './ticketing/access-guard.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -31,6 +33,7 @@ import { TaskDetailComponent } from './task-manager/task-detail/task-detail.comp
 import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketing.component';
 import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
+import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
 
 
 @NgModule({
@@ -53,7 +56,8 @@ import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.compone
     TaskDetailComponent,
     HomeTicketingComponent,
     TicketsExplorerComponent,
-    TicketEditComponent
+    TicketEditComponent,
+    TicketsListComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,8 @@ import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.compone
   ],
   providers: [
     TasksService,
+    ProjectsService,
+    TicketingService,
     AuthService,
     AuthGuard,
     TicketingGuard,

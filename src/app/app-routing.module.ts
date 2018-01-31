@@ -1,3 +1,4 @@
+import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
 import { TicketingGuard } from './ticketing/access-guard.service';
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
@@ -36,7 +37,9 @@ const appRoutes: Routes = [
   ]},
   { path: 'ticketing', canActivate: [AuthGuard], component: TicketingComponent, children: [
     { path: 'ticketing-options', component: HomeTicketingComponent},
-    { path: 'tickets-explorer', component: TicketsExplorerComponent},
+    { path: 'tickets-explorer', component: TicketsExplorerComponent, children: [
+      { path: 'tickets-list', component: TicketsListComponent}
+    ]},
     { path: 'ticket-edit', component: TicketEditComponent}
   ]},
   { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent},

@@ -1,6 +1,7 @@
+import { ProjectsService } from './../../shared/projects.service';
 import { HttpEvent } from '@angular/common/http';
 import { DataStorageService } from './../../shared/data.storage.service';
-import { Project } from './../project.model';
+import { Project } from './../../shared/project.model';
 import { Router} from '@angular/router';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
@@ -24,12 +25,16 @@ export class TaskEditComponent implements OnInit {
   projects: Project[];
   projectSelected: number;
 
-  constructor(private tasksService: TasksService, private router: Router, private dataStorageService: DataStorageService) { }
+  constructor(
+    private tasksService: TasksService,
+    private projectsService: ProjectsService,
+    private router: Router,
+    private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.editedTaskIndex = this.tasksService.startedEditing;
     this.initForm();
-    this.projects = this.tasksService.getProjects();
+    this.projects = this.projectsService.getProjects();
     this.projectSelected = this.tasksService.projectSelected;
   }
 

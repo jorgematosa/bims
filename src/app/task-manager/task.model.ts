@@ -1,4 +1,4 @@
-import { Project } from './project.model';
+import { Project } from './../shared/project.model';
 export class Task {
   public id: number;
   public name: string;

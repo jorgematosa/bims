@@ -1,6 +1,7 @@
+import { ProjectsService } from './../../shared/projects.service';
 import { DataStorageService } from './../../shared/data.storage.service';
 import { Subscription } from 'rxjs/Subscription';
-import { Project } from './../project.model';
+import { Project } from './../../shared/project.model';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -22,6 +23,7 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(
     private tasksService: TasksService,
+    private projectsService: ProjectsService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -33,7 +35,7 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
       }
     );
     this.tasks = this.tasksService.getTasks();
-    this.projects = this.tasksService.getProjects();
+    this.projects = this.projectsService.getProjects();
   }
 
   ngOnChanges() {
