@@ -1,4 +1,12 @@
-#sidebar {
-  position: fixed;
-  background-color: black;
+.sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 48px;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: gray;
+  width: 15%;
+  text-align: center;
 }
