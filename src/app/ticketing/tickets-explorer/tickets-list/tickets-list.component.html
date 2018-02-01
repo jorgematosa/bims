@@ -1,32 +1,13 @@
 <h2>{{ projectSelected.name }}</h2>
 <br>
-<span *ngIf="!showUserTickets">
-  <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
-    <thead>
-      <tr>
-          <th>Id</th>
-          <th>Summary</th>
-          <th>Description</th>
-          <th>Assigned Project</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-        <ng-container *ngIf="ticket.destProject.name === projectSelected.name">
-          <td>{{ ticket.id }}</td>
-          <td>{{ ticket.summary }}</td>
-          <td>{{ ticket.description }}</td>
-          <td>{{ ticket.destProject.name }}</td>
-          <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
-          <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-          <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
-        </ng-container>
-      </tr>
-    </tbody>
-  </div>
-</span>
-<span *ngIf="showUserTickets">
-    <div class="table table-responsive" align="center">
+<div class="btn-group" role="group" *ngIf="!allProjectsTickets">
+  <button type="button" class="btn btn-primary" (click)="onAssignedTickets()" [ngStyle]="{'color': assignedTickets ? 'white' : 'rgb(133, 184, 241)'}">Assigned Tickets</button>
+  <button type="button" class="btn btn-primary" (click)="onOpenedTickets()" [ngStyle]="{'color': assignedTickets ? 'rgb(133, 184, 241)' : 'white'}">Your Opened Tickets</button>
+</div>
+<br><br>
+<span *ngIf="assignedTickets || allProjectsTickets">
+  <span *ngIf="!showUserTickets">
+    <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
       <thead>
         <tr>
             <th>Id</th>
@@ -37,18 +18,47 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-          <ng-container *ngIf="hasAccess(ticket.destProject.roleAccess)">
+          <ng-container *ngIf="ticket.destProject.name === projectSelected.name">
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.destProject.name }}</td>
             <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
             <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-            <td *ngIf="expression"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
     </div>
   </span>
+  <span *ngIf="showUserTickets">
+      <div class="table table-responsive" align="center">
+        <thead>
+          <tr>
+              <th>Id</th>
+              <th>Summary</th>
+              <th>Description</th>
+              <th>Assigned Project</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
+            <ng-container *ngIf="hasAccess(ticket.destProject.roleAccess)">
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.summary }}</td>
+              <td>{{ ticket.description }}</td>
+              <td>{{ ticket.destProject.name }}</td>
+              <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
+              <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
+              <td *ngIf="expression"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </div>
+    </span>
+</span>
+<span *ngIf="openedTickets">
+
+</span>
 
 

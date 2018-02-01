@@ -14,12 +14,16 @@ import { Ticket } from '../../ticket.model';
 })
 export class TicketsListComponent implements OnInit, OnDestroy {
   projectSelected: Project;
+  allProjectsTickets: boolean;
   showUserTickets: boolean;
   loggedUser: User;
   projects: Project[] = [];
   tickets: Ticket[] = [];
   subscription: Subscription;
   userTicketsSubscription: Subscription;
+  allUserTicketsSubscription: Subscription;
+  assignedTickets = true;
+  openedTickets = false;
 
   constructor(private ticketingService: TicketingService, private projectsService: ProjectsService, private authService: AuthService) { }
 
@@ -34,17 +38,23 @@ export class TicketsListComponent implements OnInit, OnDestroy {
         this.showUserTickets = flag;
       }
     );
+    this.allUserTicketsSubscription = this.ticketingService.userTickets.subscribe(
+      (flag: boolean) => {
+        this.allProjectsTickets = flag;
+      }
+    );
     this.loggedUser = this.authService.loggedUser;
     this.projects = this.projectsService.getProjects();
-    this.tickets.push(new Ticket(12, 'first ticket', 'first ticket description', this.projects[0]));
-    this.tickets.push(new Ticket(12, 'second ticket', 'second ticket description', this.projects[0]));
-    this.tickets.push(new Ticket(12, 'third ticket', 'third ticket description', this.projects[1]));
-    this.tickets.push(new Ticket(12, 'fourth ticket', 'fourth ticket description', this.projects[2]));
+    this.tickets.push(new Ticket(12, 'first ticket', 'first ticket description', this.projects[1], this.projects[0]));
+    this.tickets.push(new Ticket(12, 'second ticket', 'second ticket description', this.projects[1], this.projects[0]));
+    this.tickets.push(new Ticket(12, 'third ticket', 'third ticket description', this.projects[0], this.projects[1]));
+    this.tickets.push(new Ticket(12, 'fourth ticket', 'fourth ticket description', this.projects[1], this.projects[2]));
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.userTicketsSubscription.unsubscribe();
+    this.allUserTicketsSubscription.unsubscribe();
   }
 
   hasAccess(roleAccess: string[]) { // verifica os tickets a que o utilizador tem acesso
@@ -53,5 +63,15 @@ export class TicketsListComponent implements OnInit, OnDestroy {
     } else {
       return false;
     }
+  }
+
+  onAssignedTickets() {
+    this.assignedTickets = true;
+    this.openedTickets = false;
+  }
+
+  onOpenedTickets() {
+    this.assignedTickets = false;
+    this.openedTickets = true;
   }
 }

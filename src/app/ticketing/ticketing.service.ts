@@ -8,4 +8,5 @@ export class TicketingService {
   home: Subject<boolean> = new BehaviorSubject<boolean>(true);
   projectSelected: Subject<Project> = new BehaviorSubject<Project>(null);
   showUserTickets: Subject<boolean> = new BehaviorSubject<boolean>(false);
+  userTickets: Subject<boolean> = new BehaviorSubject<boolean>(true);
 }
