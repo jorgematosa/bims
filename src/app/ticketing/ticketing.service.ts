@@ -6,5 +6,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TicketingService {
   home: Subject<boolean> = new BehaviorSubject<boolean>(true);
-  public projectSelected: Project;
+  projectSelected: Subject<Project> = new BehaviorSubject<Project>(null);
+  showUserTickets: Subject<boolean> = new BehaviorSubject<boolean>(false);
 }

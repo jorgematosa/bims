@@ -6,30 +6,30 @@
   </div>
   <br><br>
   <div class="table table-responsive" align="center" *ngIf="projectSelected !== -1">
-      <thead>
-        <tr>
-            <th>Id</th>
-            <th>Task</th>
-            <th>Description</th>
-            <th>Reporter</th>
-            <th>Assignee</th>
-            <th>State</th>
-            <th>Priority</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of tasks; let i = index" (click)="onSelectTask(i)" style="cursor: pointer;">
-          <ng-container *ngIf="item.project.name === projects[projectSelected].name">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.details }}</td>
-            <td>{{ item.reporter }}</td>
-            <td>{{ item.assignee }}</td>
-            <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td>
-            <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td>
-            <td><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
-          </ng-container>
+    <thead>
+      <tr>
+          <th>Id</th>
+          <th>Task</th>
+          <th>Description</th>
+          <th>Reporter</th>
+          <th>Assignee</th>
+          <th>State</th>
+          <th>Priority</th>
         </tr>
-      </tbody>
-    </div>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tasks; let i = index" (click)="onSelectTask(i)" style="cursor: pointer;">
+        <ng-container *ngIf="item.project.name === projects[projectSelected].name">
+          <td>{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.details }}</td>
+          <td>{{ item.reporter }}</td>
+          <td>{{ item.assignee }}</td>
+          <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td>
+          <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td>
+          <td><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </div>
 </div>

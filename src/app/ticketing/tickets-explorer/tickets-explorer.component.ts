@@ -33,11 +33,17 @@ export class TicketsExplorerComponent implements OnInit {
 
   onCreateTicket() {
     this.ticketingService.home.next(false);
-    this.router.navigate(['./ticket-edit'], {relativeTo: this.route});
+    this.router.navigate(['./../ticket-edit'], {relativeTo: this.route});
   }
 
   onTicketsShow(project: Project) {
-    this.ticketingService.projectSelected = project;
+    this.ticketingService.projectSelected.next(project);
+    this.ticketingService.showUserTickets.next(false);
+    this.router.navigate(['tickets-list'], {relativeTo: this.route});
+  }
+
+  showUserTickets() {
+    this.ticketingService.showUserTickets.next(true);
     this.router.navigate(['tickets-list'], {relativeTo: this.route});
   }
 }

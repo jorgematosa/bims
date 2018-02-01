@@ -1,39 +1,37 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="sidebar-sticky">
-      <ul class="nav flex-column">
-        <li class="nav-item" style="cursor: pointer;">
-          <h5>Your Tickets</h5>
-        </li>
-        <li class="nav-item">
-          <h4>Your Projects</h4>
-        </li>
-        <li class="nav-item" *ngFor="let project of projects" id="projects" (click)="onTicketsShow(project)" style="cursor: pointer;">
-          {{ project.name }}
-        </li>
-        <li class="nav-item" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;" (click)="showAll = !showAll">
-          <h4>All Projects {{showAll ? '+' : '-'}}</h4>
-        </li>
-        <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-          <li class="nav-item" *ngFor="let project of allProjects" id="projects" (click)="onTicketsShow(project)" style="cursor: pointer;">
-            {{ project.name }}
-          </li>
-        </div>
-      </ul>
+<div class="sidebar-sticky">
+  <ul class="nav flex-column">
+    <li class="nav-item" style="cursor: pointer;" (click)="showUserTickets()">
+      <h5>Your Tickets</h5>
+    </li>
+    <hr>
+    <span class="nav-item">
+      <h4>Your Projects</h4>
+    </span>
+    <li class="nav-item" *ngFor="let project of projects" id="projects" (click)="onTicketsShow(project)" style="cursor: pointer;">
+      {{ project.name }}
+    </li>
+    <hr>
+    <span class="nav-item" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;" (click)="showAll = !showAll">
+      <h4>All Projects {{showAll ? '+' : '-'}}</h4>
+    </span>
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+      <li class="nav-item" *ngFor="let project of allProjects" id="projects" (click)="onTicketsShow(project)" style="cursor: pointer;">
+        {{ project.name }}
+      </li>
     </div>
+  </ul>
+</div>
+<div class="container-fluid">
+  <div class="row text-right">
     <div class="col-md-10">
-        <div class="row text-right">
-          <div class="col-md-12">
-            <br>
-            <button type="button" class="btn btn-success" (click)="onCreateTicket()">Create Ticket</button>
-          </div>
-        </div>
-        <div class="row text-center">
-          <div class="col-md-12">
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-      </div>
+      <button type="button" class="btn btn-primary" (click)="onCreateTicket()">Create Ticket</button>
+    </div>
+  </div>
+  <br><br>
+  <div class="row text-center">
+    <div class="col-md-10">
+        <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
 
