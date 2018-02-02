@@ -1,4 +1,4 @@
-<h2>{{ projectSelected.name }}</h2>
+<h2>{{ showUserTickets? 'All Tickets' : projectSelected.name }}</h2>
 <br>
 <div class="btn-group" role="group" *ngIf="!allProjectsTickets">
   <button type="button" class="btn btn-primary" (click)="onAssignedTickets()" [ngStyle]="{'color': assignedTickets ? 'white' : 'rgb(133, 184, 241)'}">Assigned Tickets</button>
@@ -13,6 +13,7 @@
             <th>Id</th>
             <th>Summary</th>
             <th>Description</th>
+            <th>Ticket Reporter</th>
             <th>Assigned Project</th>
           </tr>
       </thead>
@@ -22,6 +23,7 @@
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.description }}</td>
+            <td>{{ ticket.ticketReporter.name }}</td>
             <td>{{ ticket.destProject.name }}</td>
             <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
             <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
@@ -38,6 +40,7 @@
               <th>Id</th>
               <th>Summary</th>
               <th>Description</th>
+              <th>Ticket Reporter</th>
               <th>Assigned Project</th>
             </tr>
         </thead>
@@ -47,6 +50,7 @@
               <td>{{ ticket.id }}</td>
               <td>{{ ticket.summary }}</td>
               <td>{{ ticket.description }}</td>
+              <td>{{ ticket.ticketReporter.name }}</td>
               <td>{{ ticket.destProject.name }}</td>
               <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
               <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
@@ -57,8 +61,61 @@
       </div>
     </span>
 </span>
-<span *ngIf="openedTickets">
-
+<span *ngIf="openedTickets && !allProjectsTickets">
+  <span *ngIf="!showUserTickets">
+    <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>Summary</th>
+            <th>Description</th>
+            <th>Ticket Reporter</th>
+            <th>Assigned Project</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
+          <ng-container *ngIf="ticket.ticketReporter.name === projectSelected.name">
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.summary }}</td>
+            <td>{{ ticket.description }}</td>
+            <td>{{ ticket.ticketReporter.name }}</td>
+            <td>{{ ticket.destProject.name }}</td>
+            <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
+            <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
+            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </div>
+  </span>
+  <span *ngIf="showUserTickets">
+    <div class="table table-responsive" align="center">
+      <thead>
+        <tr>
+            <th>Id</th>
+            <th>Summary</th>
+            <th>Description</th>
+            <th>Ticket Reporter</th>
+            <th>Assigned Project</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
+          <ng-container *ngIf="hasAccess(ticket.ticketReporter.roleAccess)">
+            <td>{{ ticket.id }}</td>
+            <td>{{ ticket.summary }}</td>
+            <td>{{ ticket.description }}</td>
+            <td>{{ ticket.ticketReporter.name }}</td>
+            <td>{{ ticket.destProject.name }}</td>
+            <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
+            <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
+            <td *ngIf="expression"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </div>
+  </span>
 </span>
 
 
