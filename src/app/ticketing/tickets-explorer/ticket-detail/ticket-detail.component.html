@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h4>Ticket Name [ID = {{ticket.id}}]</h4>
+      <p>{{ ticket.summary}}</p>
+      <h4>State</h4>
+      <p>{{ ticket.state}}</p>
+      <h4>Description</h4>
+      <p>{{ ticket.description}}</p>
+      <hr>
+      <h5>Ticket Priority</h5>
+      <p>{{ ticket.priority}}</p>
+      <h5>Ticket Reporter</h5>
+      <p>{{ ticket.ticketReporter.name}}</p>
+      <h5>Ticket Assignee</h5>
+      <p>{{ ticket.destProject.name}}</p>
+      <button type="button" class="btn btn-success" (click)="onEditTask()">Edit Ticket</button>
+      <button type="button" class="btn btn-group-xs" (click)="onGoBack()">Go Back</button>
+    </div>
+</div>

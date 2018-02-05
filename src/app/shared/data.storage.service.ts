@@ -1,3 +1,5 @@
+import { Ticket } from './../ticketing/ticket.model';
+import { TicketingService } from './../ticketing/ticketing.service';
 import { User } from './../auth/user.model';
 import { Task } from './../task-manager/task.model';
 import { TasksService } from './../task-manager/tasks.service';
@@ -15,7 +17,12 @@ import { HttpResponse } from '@angular/common/http/src/response';
 
 @Injectable()
 export class DataStorageService {
-  constructor (private httpClient: HttpClient, private taskService: TasksService, private authService: AuthService) {}
+  constructor (
+    private httpClient: HttpClient,
+    private taskService: TasksService,
+    private authService: AuthService,
+    private ticketingService: TicketingService
+  ) {}
 
   storeTasks () { // change the put string to the correspondent firebase backend
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/task-manager/tasks.json', this.taskService.getTasks(), {
@@ -26,6 +33,13 @@ export class DataStorageService {
 
   storeUsers () {
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/users.json', this.authService.getUsers(), {
+      reportProgress: true,
+    });
+    return this.httpClient.request(req);
+  }
+
+  storeTickets () { // change the put string to the correspondent firebase backend
+    const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/ticketing/tickets.json', this.ticketingService.getTickets(), {
       reportProgress: true,
     });
     return this.httpClient.request(req);
@@ -65,6 +79,22 @@ export class DataStorageService {
       error => {
         this.authService.token = null;
         this.authService.usersLoaded.next(false);
+      }
+    );
+  }
+
+  getTickets() { // change the get string to the correspondent firebase backend
+    this.httpClient.get<Ticket[]>('https://bims-3bf9d.firebaseio.com/ticketing/tickets.json', {
+      responseType: 'json'
+    })
+    .map(
+      (tickets) => {
+        return tickets;
+      }
+    )
+    .subscribe(
+      (tickets: Ticket[]) => {
+        this.ticketingService.setTickets(tickets);
       }
     );
   }

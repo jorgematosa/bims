@@ -1,6 +1,6 @@
 <h2>{{ showUserTickets? 'All Tickets' : projectSelected.name }}</h2>
 <br>
-<div class="btn-group" role="group" *ngIf="!allProjectsTickets">
+<div class="btn-group" role="group" *ngIf="!allProjectsTickets || showUserTickets">
   <button type="button" class="btn btn-primary" (click)="onAssignedTickets()" [ngStyle]="{'color': assignedTickets ? 'white' : 'rgb(133, 184, 241)'}">Assigned Tickets</button>
   <button type="button" class="btn btn-primary" (click)="onOpenedTickets()" [ngStyle]="{'color': assignedTickets ? 'rgb(133, 184, 241)' : 'white'}">Your Opened Tickets</button>
 </div>
@@ -15,6 +15,8 @@
             <th>Description</th>
             <th>Ticket Reporter</th>
             <th>Assigned Project</th>
+            <th>State</th>
+            <th>Priority</th>
           </tr>
       </thead>
       <tbody>
@@ -25,9 +27,9 @@
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.ticketReporter.name }}</td>
             <td>{{ ticket.destProject.name }}</td>
-            <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
-            <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+            <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
+            <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
+            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
@@ -42,6 +44,8 @@
               <th>Description</th>
               <th>Ticket Reporter</th>
               <th>Assigned Project</th>
+              <th>State</th>
+              <th>Priority</th>
             </tr>
         </thead>
         <tbody>
@@ -52,9 +56,9 @@
               <td>{{ ticket.description }}</td>
               <td>{{ ticket.ticketReporter.name }}</td>
               <td>{{ ticket.destProject.name }}</td>
-              <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
-              <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-              <td *ngIf="expression"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+              <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
+              <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
+              <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
             </ng-container>
           </tr>
         </tbody>
@@ -71,6 +75,8 @@
             <th>Description</th>
             <th>Ticket Reporter</th>
             <th>Assigned Project</th>
+            <th>State</th>
+            <th>Priority</th>
           </tr>
       </thead>
       <tbody>
@@ -81,9 +87,9 @@
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.ticketReporter.name }}</td>
             <td>{{ ticket.destProject.name }}</td>
-            <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
-            <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+            <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
+            <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
+            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
@@ -98,6 +104,8 @@
             <th>Description</th>
             <th>Ticket Reporter</th>
             <th>Assigned Project</th>
+            <th>State</th>
+            <th>Priority</th>
           </tr>
       </thead>
       <tbody>
@@ -108,9 +116,9 @@
             <td>{{ ticket.description }}</td>
             <td>{{ ticket.ticketReporter.name }}</td>
             <td>{{ ticket.destProject.name }}</td>
-            <!-- <td><span [ngStyle]="{'color': item.state === 'Open' ? 'green' : (item.state === 'Done' ? ' solid black' : 'default')}">{{ item.state }}</span></td> -->
-            <!-- <td><span [ngStyle]="{'color': item.priority === 'High' ? 'red' : (item.priority === 'Medium' ? 'blue' : 'default')}">{{ item.priority }}</span></td> -->
-            <td *ngIf="expression"><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+            <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
+            <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
+            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>

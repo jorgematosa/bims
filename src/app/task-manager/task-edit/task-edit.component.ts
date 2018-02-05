@@ -6,7 +6,7 @@ import { Router} from '@angular/router';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './task-edit.component.html',
   styleUrls: ['./task-edit.component.css']
 })
-export class TaskEditComponent implements OnInit {
+export class TaskEditComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   taskEditForm: FormGroup;
   priorities = ['High', 'Medium', 'Low'];
@@ -36,6 +36,10 @@ export class TaskEditComponent implements OnInit {
     this.initForm();
     this.projects = this.projectsService.getProjects();
     this.projectSelected = this.tasksService.projectSelected;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   onSubmit() {

@@ -34,6 +34,7 @@ import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketin
 import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
+import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/
     HomeTicketingComponent,
     TicketsExplorerComponent,
     TicketEditComponent,
-    TicketsListComponent
+    TicketsListComponent,
+    TicketDetailComponent
   ],
   imports: [
     BrowserModule,

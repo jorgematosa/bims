@@ -1,3 +1,4 @@
+import { DataStorageService } from './../shared/data.storage.service';
 import { TicketingService } from './ticketing.service';
 import { ProjectsService } from './../shared/projects.service';
 import { TasksService } from './../task-manager/tasks.service';
@@ -6,7 +7,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../auth/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Component, OnInit, OnDestroy} from '@angular/core';
-import { DataStorageService } from '../shared/data.storage.service';
 
 @Component({
   selector: 'app-ticketing',
@@ -24,7 +24,9 @@ export class TicketingComponent implements OnInit, OnDestroy{
     private route: ActivatedRoute,
     private projectsService: ProjectsService,
     private authService: AuthService,
-    private ticketingService: TicketingService) { }
+    private ticketingService: TicketingService,
+    private dataStorageService: DataStorageService
+  ) { }
 
   ngOnInit() {
     this.subscription = this.authService.usersLoaded.subscribe(
@@ -42,6 +44,7 @@ export class TicketingComponent implements OnInit, OnDestroy{
         console.log(this.home);
       }
     );
+    this.dataStorageService.getTickets();
   }
 
   ngOnDestroy() {
@@ -59,7 +62,7 @@ export class TicketingComponent implements OnInit, OnDestroy{
 
   onSearchTickets() {
     this.ticketingService.home.next(false);
-    this.router.navigate(['./tickets-explorer'], {relativeTo: this.route});
+    this.router.navigate(['./tickets-explorer/tickets-list'], {relativeTo: this.route});
   }
 
   onCreateTicket() {

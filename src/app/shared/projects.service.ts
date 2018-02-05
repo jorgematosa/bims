@@ -33,4 +33,13 @@ export class ProjectsService {
 
     return projects;
   }
+
+  getProjectByName(name: string) {
+    const projects = this.projects.slice();
+    for (const project of projects) {
+      if (project.name === name) {
+        return project;
+      }
+    }
+  }
 }

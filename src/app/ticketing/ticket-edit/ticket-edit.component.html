@@ -1,3 +1,68 @@
-<p>
-  ticket-edit works!
-</p>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <br>
+      <h3>New Ticket</h3>
+      <br>
+      <form [formGroup]="ticketEditForm" (ngSubmit)=onSubmit()>
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <input type="text" id="summary" formControlName="summary" class="form-control">
+          <span class="help-block" *ngIf="!ticketEditForm.get('summary').valid && ticketEditForm.get('summary').touched">You must add the ticket summary</span>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea type="text" id="description" formControlName="description" class="form-control" rows="5"></textarea>
+          <span class="help-block" *ngIf="!ticketEditForm.get('description').valid && ticketEditForm.get('description').touched">You must add the ticket description</span>
+        </div>
+        <hr>
+        <div class="row text-center" id="selects">
+          <div class="col">
+            <div class="form-group" style="float: center;">
+              <label for="priority">Priority</label>
+              <select id="priority" formControlName="priority" class="form-control center-block">
+                <option *ngFor="let opt of priorities" [value]="opt" >{{ opt }}</option>
+              </select>
+              <span class="help-block" *ngIf="!ticketEditForm.get('priority').valid && ticketEditForm.get('priority').touched">You must add the ticket priority</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group" style="float: center;">
+              <label for="state">State</label>
+              <select id="state" formControlName="state" class="form-control center-block">
+                <option *ngFor="let opt of states" [value]="opt" >{{ opt }}</option>
+              </select>
+              <span class="help-block" *ngIf="!ticketEditForm.get('state').valid && ticketEditForm.get('state').touched">You must add the ticket state</span>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row text-center" id="selects">
+          <div class="col">
+            <div class="form-group" style="float: center;">
+              <label for="ticketReporter">Reporter</label>
+              <select id="ticketReporter" formControlName="ticketReporter" class="form-control center-block">
+                <option *ngFor="let project of userProjects" [value]="project.name" >{{ project.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group" style="float: center;">
+              <label for="destProject">Assignee</label>
+              <select id="destProject" formControlName="destProject" class="form-control center-block">
+                <option *ngFor="let project of projects" [value]="project.name" >{{ project.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <p class="help-block" *ngIf="!ticketEditForm.get('ticketReporter').valid && ticketEditForm.get('ticketReporter').touched">You must add the ticket reporter</p>
+        <p class="help-block" *ngIf="!ticketEditForm.get('destProject').valid && ticketEditForm.get('destProject').touched">You must add the ticket assignee</p>
+        <hr>
+        <button type="submit" class="btn btn-success" [disabled]="!ticketEditForm.valid">{{editedTicketIndex === null ? 'Create Ticket' : 'Update Ticket'}}</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

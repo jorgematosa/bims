@@ -1,0 +1,24 @@
+.container {
+  max-width: 500px;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+select {
+  max-width: 120px;
+  text-align-last: center;
+}
+
+select.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+#selects {
+  display: inline-flex;
+}

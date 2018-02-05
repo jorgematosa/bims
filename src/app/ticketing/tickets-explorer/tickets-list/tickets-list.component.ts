@@ -1,10 +1,11 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { User } from './../../../auth/user.model';
 import { AuthService } from './../../../auth/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 import { ProjectsService } from './../../../shared/projects.service';
 import { TicketingService } from './../../ticketing.service';
 import { Project } from './../../../shared/project.model';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { Ticket } from '../../ticket.model';
 
 @Component({
@@ -12,10 +13,10 @@ import { Ticket } from '../../ticket.model';
   templateUrl: './tickets-list.component.html',
   styleUrls: ['./tickets-list.component.css']
 })
-export class TicketsListComponent implements OnInit, OnDestroy {
+export class TicketsListComponent implements OnInit, OnDestroy, OnChanges {
   projectSelected: Project;
   allProjectsTickets: boolean;
-  showUserTickets: boolean;
+  showUserTickets = true;
   loggedUser: User;
   projects: Project[] = [];
   tickets: Ticket[] = [];
@@ -25,7 +26,13 @@ export class TicketsListComponent implements OnInit, OnDestroy {
   assignedTickets = true;
   openedTickets = false;
 
-  constructor(private ticketingService: TicketingService, private projectsService: ProjectsService, private authService: AuthService) { }
+  constructor(
+    private ticketingService: TicketingService,
+    private projectsService: ProjectsService,
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.subscription = this.ticketingService.projectSelected.subscribe(
@@ -45,12 +52,12 @@ export class TicketsListComponent implements OnInit, OnDestroy {
     );
     this.loggedUser = this.authService.loggedUser;
     this.projects = this.projectsService.getProjects();
-    this.tickets.push(new Ticket(12, 'first ticket', 'first ticket description', this.projects[1], this.projects[0]));
-    this.tickets.push(new Ticket(12, 'second ticket', 'second ticket description', this.projects[1], this.projects[0]));
-    this.tickets.push(new Ticket(12, 'third ticket', 'third ticket description', this.projects[0], this.projects[1]));
-    this.tickets.push(new Ticket(12, 'fourth ticket', 'fourth ticket description', this.projects[1], this.projects[2]));
+    this.tickets = this.ticketingService.getTickets();
   }
 
+  ngOnChanges() {
+    this.tickets = this.ticketingService.getTickets();
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.userTicketsSubscription.unsubscribe();
@@ -73,5 +80,15 @@ export class TicketsListComponent implements OnInit, OnDestroy {
   onOpenedTickets() {
     this.assignedTickets = false;
     this.openedTickets = true;
+  }
+
+  onSelectTicket(index: number) {
+    this.ticketingService.ticketSelection(index);
+    this.router.navigate(['../ticket-detail'], {relativeTo: this.route});
+  }
+
+  onEditTicket(index: number) {
+    this.ticketingService.startEditing(index);
+    this.router.navigate(['../../ticket-edit'], {relativeTo: this.route});
   }
 }
