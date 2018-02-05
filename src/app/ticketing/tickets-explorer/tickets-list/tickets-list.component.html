@@ -29,7 +29,7 @@
             <td>{{ ticket.destProject.name }}</td>
             <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
             <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
-            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
+            <td *ngIf="canEdit([ticket.ticketReporter.name, ticket.destProject.name])"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
@@ -58,7 +58,7 @@
               <td>{{ ticket.destProject.name }}</td>
               <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
               <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
-              <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
+              <td *ngIf="canEdit([ticket.ticketReporter.name, ticket.destProject.name])"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
             </ng-container>
           </tr>
         </tbody>
@@ -89,7 +89,7 @@
             <td>{{ ticket.destProject.name }}</td>
             <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
             <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
-            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
+            <td *ngIf="canEdit([ticket.ticketReporter.name, ticket.destProject.name])"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>
@@ -118,7 +118,7 @@
             <td>{{ ticket.destProject.name }}</td>
             <td><span [ngStyle]="{'color': ticket.state === 'Open' ? 'green' : (ticket.state === 'Under Work' ? 'grey' : 'default')}">{{ ticket.state }}</span></td>
             <td><span [ngStyle]="{'color': ticket.priority === 'High' ? 'red' : (ticket.priority === 'Medium' ? 'blue' : 'default')}">{{ ticket.priority }}</span></td>
-            <td *ngIf="hasAccess(ticket.destProject.roleAccess)"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
+            <td *ngIf="canEdit([ticket.ticketReporter.name, ticket.destProject.name])"><button class="btn-xs btn-success" (click)="onEditTicket(i)">Edit</button></td>
           </ng-container>
         </tr>
       </tbody>

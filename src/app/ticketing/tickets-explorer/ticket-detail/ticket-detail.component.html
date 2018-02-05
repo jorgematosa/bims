@@ -14,7 +14,7 @@
       <p>{{ ticket.ticketReporter.name}}</p>
       <h5>Ticket Assignee</h5>
       <p>{{ ticket.destProject.name}}</p>
-      <button type="button" class="btn btn-success" (click)="onEditTask()">Edit Ticket</button>
+      <button type="button" class="btn btn-success" (click)="onEditTask()" *ngIf="hasAccess([ticket.ticketReporter.name, ticket.destProject.name])">Edit Ticket</button>
       <button type="button" class="btn btn-group-xs" (click)="onGoBack()">Go Back</button>
     </div>
 </div>

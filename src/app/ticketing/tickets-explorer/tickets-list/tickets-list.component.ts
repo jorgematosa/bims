@@ -72,6 +72,20 @@ export class TicketsListComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
+  canEdit(projectsName: string[]) { // verifica os tickets a que o utilizador tem acesso
+    const destProject = this.projectsService.getProjectByName(projectsName[1]);
+    const repProject = this.projectsService.getProjectByName(projectsName[0]);
+
+    if (
+      (repProject.roleAccess.indexOf(this.authService.loggedUser.role) > -1) ||
+      destProject.roleAccess.indexOf(this.authService.loggedUser.role) > -1
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   onAssignedTickets() {
     this.assignedTickets = true;
     this.openedTickets = false;
