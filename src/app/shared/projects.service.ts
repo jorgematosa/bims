@@ -5,10 +5,10 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProjectsService {
   private projects: Project[] = [
-    new Project('XPTO', 'First Project', ['Administration', 'Human Resources']),
-    new Project('Care', 'Second Project', ['Administration', 'Development']),
-    new Project('Ruth', 'Third Project', ['Administration', 'Marketing']),
-    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'])
+    new Project('XPTO', 'First Project', ['Administration', 'Human Resources'], ['Passwords', 'Programas', 'Máquinas']),
+    new Project('Care', 'Second Project', ['Administration', 'Development'], ['Passwords', 'Programas']),
+    new Project('Ruth', 'Third Project', ['Administration', 'Marketing'], ['Passwords', 'Máquinas']),
+    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'], ['Passwords'])
   ];
 
   getProjects() {

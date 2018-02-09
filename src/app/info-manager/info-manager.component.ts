@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Project } from '../shared/project.model';
 import { ProjectsService } from '../shared/projects.service';
 import { User } from './../auth/user.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info-manager',
@@ -15,13 +16,16 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   userLoadedSubscription: Subscription;
   projectSelected: Project;
-  projects: Project[] = null;
+  userProjects: Project[] = null;
   loggedUser: User = null;
 
   constructor(
     private authService: AuthService,
     private projectsService: ProjectsService,
-    private infoManagerService: InfoManagerService) { }
+    private infoManagerService: InfoManagerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.subscription = this.infoManagerService.projectSelected.subscribe(
@@ -33,7 +37,7 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.loggedUser;
-          this.projects = this.projectsService.getProjects();
+          this.userProjects = this.projectsService.getProjectsByRole(this.loggedUser.role);
         }
       }
     );
@@ -45,7 +49,7 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
   }
 
   isLoaded() {
-    if (this.loggedUser !== null && this.projects !== null ) {
+    if (this.loggedUser !== null && this.userProjects !== null ) {
       return true;
     } else {
       return false;
@@ -54,6 +58,12 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
 
   selectProject(project: Project) {
     this.infoManagerService.projectSelected.next(project);
+    this.infoManagerService.currentSection.next(null);
+  }
+
+  onInfo(infoSection: string) {
+    this.infoManagerService.currentSection.next(infoSection);
+    this.router.navigate(['info'], {relativeTo: this.route});
   }
 
 }

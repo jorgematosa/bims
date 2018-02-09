@@ -7,17 +7,17 @@
       {{ projectSelected !== null ? projectSelected.name : 'Select Project' }}
     </button>
     <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-      <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of projects; let i = index"><p>{{ project.name }}</p></a>
+      <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of userProjects; let i = index"><p>{{ project.name }}</p></a>
     </div>
     </a>
   <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/task-manager">Task Manager</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/people-and-processes">People and Processes</a>
-      </li>
+      <ng-container *ngIf="projectSelected !== null">
+        <li class="nav-item" *ngFor="let infoSection of projectSelected.infoSections">
+          <a class="nav-link" routerLinkActive="active" style="cursor: pointer" (click)="onInfo(infoSection)">{{ infoSection }}</a>
+        </li>
+      </ng-container>
     </ul>
   </div>
 </nav>
+<router-outlet></router-outlet>
