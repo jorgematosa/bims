@@ -35,6 +35,8 @@ import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-e
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
 import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
+import { InfoManagerService } from './info-manager/info-manager.service';
+import { InfoComponent } from './info-manager/info/info.component';
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detai
     TicketsExplorerComponent,
     TicketEditComponent,
     TicketsListComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detai
     TasksService,
     ProjectsService,
     TicketingService,
+    InfoManagerService,
     AuthService,
     AuthGuard,
     TicketingGuard,

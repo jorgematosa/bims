@@ -21,6 +21,7 @@ import { HomeComponent } from './core/home/home.component';
 import { Routes } from '@angular/router';
 import { PreloadAllModules } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { InfoComponent } from './info-manager/info/info.component';
 
 const appRoutes: Routes = [
   { path: '',  component: HomeComponent, children: [
@@ -44,7 +45,9 @@ const appRoutes: Routes = [
     ]},
     { path: 'ticket-edit', component: TicketEditComponent}
   ]},
-  { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent},
+  { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent, children: [
+    { path: 'info', component: InfoComponent }
+  ]},
   { path: 'people-and-processes', canActivate: [AuthGuard], component: PeopleAndProcessesComponent},
   // { path: 'user-area', component: PeopleAndProcessesComponent},
   // { path: 'administration', component: PeopleAndProcessesComponent}

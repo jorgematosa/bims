@@ -1,0 +1,27 @@
+<div class="container-fluid wrapper">
+    <div class="row text-right">
+      <div class="col-md-11">
+        <button class="btn btn-success" (click)="newEntry()" *ngIf="projectSelected !== null">New Entry</button>
+      </div>
+    </div>
+    <br><br>
+    <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
+      <thead>
+        <tr>
+            <th>Summary</th>
+            <th>Data</th>
+            <th>Observations</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let info of infos; let i = index" (click)="onSelectTask(i)" style="cursor: pointer;">
+          <ng-container *ngIf="info.project.name === projectSelected.name && info.section === currentSection">
+            <td>{{ info.summary }}</td>
+            <td>{{ info.data }}</td>
+            <td>{{ info.observations }}</td>
+            <td><button class="btn-xs btn-success" (click)="onEditTask(i)">Edit</button></td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </div>
+  </div>
