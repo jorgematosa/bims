@@ -3,6 +3,7 @@ import { InfoManagerService } from '../info-manager.service';
 import { Info } from '../info.model';
 import { Project } from '../../shared/project.model';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-info',
@@ -16,7 +17,11 @@ export class InfoComponent implements OnInit, OnDestroy {
   projectSubscription: Subscription;
   currentInfoSubscription: Subscription;
 
-  constructor(private infoManagerService: InfoManagerService) { }
+  constructor(
+    private infoManagerService: InfoManagerService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this.infos = this.infoManagerService.getInfos();
@@ -39,6 +44,16 @@ export class InfoComponent implements OnInit, OnDestroy {
 
   newEntry() {
 
+  }
+
+  onSelectInfo(index: number) {
+    this.infoManagerService.infoSelection(index);
+    this.router.navigate(['../info-detail'], {relativeTo: this.route});
+  }
+
+  onEditInfo(index: number) {
+    this.infoManagerService.startEditing(index);
+    this.router.navigate(['../info-edit'], {relativeTo: this.route});
   }
 
 }

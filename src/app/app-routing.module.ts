@@ -1,3 +1,5 @@
+import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
+import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
 import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
 import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
 import { TicketingGuard } from './ticketing/access-guard.service';
@@ -46,7 +48,9 @@ const appRoutes: Routes = [
     { path: 'ticket-edit', component: TicketEditComponent}
   ]},
   { path: 'info-manager', canActivate: [AuthGuard], component: InfoManagerComponent, children: [
-    { path: 'info', component: InfoComponent }
+    { path: 'info', component: InfoComponent },
+    { path: 'info-detail', component: InfoDetailComponent },
+    { path: 'info-edit', component: InfoEditComponent }
   ]},
   { path: 'people-and-processes', canActivate: [AuthGuard], component: PeopleAndProcessesComponent},
   // { path: 'user-area', component: PeopleAndProcessesComponent},

@@ -13,7 +13,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
   templateUrl: './ticketing.component.html',
   styleUrls: ['./ticketing.component.css']
 })
-export class TicketingComponent implements OnInit, OnDestroy{
+export class TicketingComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   homeSubscription: Subscription;
   loggedUser: User = null;

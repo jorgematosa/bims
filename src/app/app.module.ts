@@ -37,6 +37,9 @@ import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/
 import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
 import { InfoManagerService } from './info-manager/info-manager.service';
 import { InfoComponent } from './info-manager/info/info.component';
+import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
+import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
+
 
 
 @NgModule({
@@ -62,7 +65,9 @@ import { InfoComponent } from './info-manager/info/info.component';
     TicketEditComponent,
     TicketsListComponent,
     TicketDetailComponent,
-    InfoComponent
+    InfoComponent,
+    InfoEditComponent,
+    InfoDetailComponent
   ],
   imports: [
     BrowserModule,
