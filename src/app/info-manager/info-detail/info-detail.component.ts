@@ -20,11 +20,13 @@ export class InfoDetailComponent implements OnInit {
 
   ngOnInit() {
     this.infoSelected = this.infoManagerService.infoSelected;
+    console.log('number: ' + this.infoSelected);
     this.info = this.infoManagerService.getInfo(this.infoSelected);
   }
 
   onEditInfo() {
     this.infoManagerService.startEditing(this.infoSelected);
+    console.log('info selected: ' + this.infoSelected);
     this.router.navigate(['../info-edit'], {relativeTo: this.route});
   }
 

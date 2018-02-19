@@ -15,12 +15,7 @@ export class InfoManagerService {
   constructor(private projectsService: ProjectsService) {
   }
 
-  private infos: Info[] = [
-    new Info('test@test.com', 'adminadmin', 'Admin user', this.projects[0], 'Passwords'),
-    new Info('test_hrn@test.com', 'adminadmin123', 'Human Resources user', this.projects[0], 'Passwords'),
-    new Info('test info', 'test', 'nothing to show', this.projects[0], 'Programas'),
-    new Info('TESTE_PASS', 'TESTE', 'NOTHING TO SHOW', this.projects[1], 'Passwords')
-  ];
+  private infos: Info[] = [];
 
   getInfos() {
     return this.infos.slice();
@@ -46,7 +41,7 @@ export class InfoManagerService {
     this.startedEditing.next(null);
   }
 
-  updateInfos(index: number, info: Info) {
+  updateInfo(index: number, info: Info) {
     this.infos[index].summary = info.summary;
     this.infos[index].data = info.data;
     this.infos[index].observations = info.observations;

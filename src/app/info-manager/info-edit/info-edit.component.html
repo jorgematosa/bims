@@ -1,3 +1,28 @@
-<p>
-  info-edit works!
-</p>
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <form [formGroup]="infoEditForm" (ngSubmit)=onSubmit()>
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <input type="text" id="summary" formControlName="summary" class="form-control">
+          <span class="help-block" *ngIf="!infoEditForm.get('summary').valid && infoEditForm.get('summary').touched">You must add the task name</span>
+        </div>
+        <div class="form-group">
+          <label for="data">Data</label>
+          <textarea type="text" id="data" formControlName="data" class="form-control" rows="5"></textarea>
+          <!-- <span class="help-block" *ngIf="!taskEditForm.get('details').valid && taskEditForm.get('details').touched">You must add the task description</span> -->
+        </div>
+        <div class="form-group">
+          <label for="observations">Observations</label>
+          <textarea type="text" id="observations" formControlName="observations" class="form-control" rows="5"></textarea>
+          <!-- <span class="help-block" *ngIf="!taskEditForm.get('details').valid && taskEditForm.get('details').touched">You must add the task description</span> -->
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-success" [disabled]="!infoEditForm.valid">{{editedInfoIndex === null ? 'Add Info' : 'Update Info'}}</button>
+        <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+

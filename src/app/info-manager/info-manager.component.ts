@@ -1,3 +1,4 @@
+import { DataStorageService } from './../shared/data.storage.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { InfoManagerService } from './info-manager.service';
@@ -24,7 +25,8 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
     private projectsService: ProjectsService,
     private infoManagerService: InfoManagerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
         if (flag === true) {
           this.loggedUser = this.authService.loggedUser;
           this.userProjects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+          this.dataStorageService.getInfos();
         }
       }
     );

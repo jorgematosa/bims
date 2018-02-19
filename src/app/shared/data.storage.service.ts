@@ -1,3 +1,5 @@
+import { InfoManagerService } from './../info-manager/info-manager.service';
+import { Info } from './../info-manager/info.model';
 import { Ticket } from './../ticketing/ticket.model';
 import { TicketingService } from './../ticketing/ticketing.service';
 import { User } from './../auth/user.model';
@@ -21,7 +23,8 @@ export class DataStorageService {
     private httpClient: HttpClient,
     private taskService: TasksService,
     private authService: AuthService,
-    private ticketingService: TicketingService
+    private ticketingService: TicketingService,
+    private infoManagerService: InfoManagerService
   ) {}
 
   storeTasks () { // change the put string to the correspondent firebase backend
@@ -40,6 +43,13 @@ export class DataStorageService {
 
   storeTickets () { // change the put string to the correspondent firebase backend
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/ticketing/tickets.json', this.ticketingService.getTickets(), {
+      reportProgress: true,
+    });
+    return this.httpClient.request(req);
+  }
+
+  storeInfos () { // change the put string to the correspondent firebase backend
+    const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/info-manager/infos.json', this.infoManagerService.getInfos(), {
       reportProgress: true,
     });
     return this.httpClient.request(req);
@@ -95,6 +105,22 @@ export class DataStorageService {
     .subscribe(
       (tickets: Ticket[]) => {
         this.ticketingService.setTickets(tickets);
+      }
+    );
+  }
+
+  getInfos() { // change the get string to the correspondent firebase backend
+    this.httpClient.get<Info[]>('https://bims-3bf9d.firebaseio.com/info-manager/infos.json', {
+      responseType: 'json'
+    })
+    .map(
+      (infos) => {
+        return infos;
+      }
+    )
+    .subscribe(
+      (infos: Info[]) => {
+        this.infoManagerService.setInfos(infos);
       }
     );
   }

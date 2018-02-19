@@ -43,7 +43,7 @@ export class InfoComponent implements OnInit, OnDestroy {
   }
 
   newEntry() {
-
+    this.router.navigate(['../info-edit'], {relativeTo: this.route});
   }
 
   onSelectInfo(index: number) {
