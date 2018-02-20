@@ -1,0 +1,58 @@
+.sidebar-sticky {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 15%;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: rgb(179, 179, 179);
+  text-align: left;
+}
+
+.sidebar-sticky li:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
+}
+
+#projects {
+  color: white;
+  /* font-weight: bold; */
+}
+
+.btn-circle {
+  border-radius: 50%;
+}
+
+h5 {
+  margin-top: 10px;
+  color: rgb(255, 255, 255);
+}
+
+#text {
+  margin-left: 35px;
+  font-size: 20px;
+}
+
+#title {
+  margin-left: 35px;
+  font-size: 25px;
+  font-weight: bold;
+}
+.container-fluid {
+  /* padding-left: 10px;
+  width: 80%; */
+  left: 15%;
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+hr {
+  height: 2px;
+  background-color:#555;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+}

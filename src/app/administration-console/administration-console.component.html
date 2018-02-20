@@ -1,10 +1,33 @@
-<div class="container-fluid">
-    <div class="row text-center">
-      <div class="col-md-12">
-        <br>
-        <button (click)="onRegister()">Register User</button>
-        <button (click)="onUpdate()">Update User</button>
-        <br><br>
-        <router-outlet></router-outlet>
-      </div>
+<div class="container-fluid" *ngIf="!isLoaded()">
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h3 >Loading...</h3>
+    </div>
   </div>
+</div>
+<div class="sidebar-sticky" *ngIf="isLoaded()">
+  <ul class="nav flex-column">
+    <label id="title">Administration</label>
+    <hr>
+    <span class="nav-item">
+      <span id="text" (click)="onRegister()" style="cursor: pointer">Register User</span>
+    </span>
+    <hr>
+    <span class="nav-item">
+      <span id="text" (click)="onUpdate()" style="cursor: pointer">Update User</span>
+    </span>
+    <hr>
+    <span class="nav-item">
+      <span id="text" style="cursor: pointer">Create Project</span>
+    </span>
+  </ul>
+</div>
+<div class="container-fluid">
+  <br><br>
+  <div class="row text-center">
+    <div class="col-md-10">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
