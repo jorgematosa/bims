@@ -59,7 +59,7 @@ const appRoutes: Routes = [
   // { path: 'administration', component: PeopleAndProcessesComponent}
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
     { path: 'register', component: RegisterComponent}, // nest under administration console
-    { path: 'project-list', component: ProjectsListComponent },
+    { path: 'projects-list', component: ProjectsListComponent },
     { path: 'project-edit', component: ProjectEditComponent }
   ]},
   { path: '**', redirectTo: '/'}

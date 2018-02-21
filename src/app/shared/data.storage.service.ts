@@ -1,3 +1,5 @@
+import { Project } from './project.model';
+import { ProjectsService } from './projects.service';
 import { InfoManagerService } from './../info-manager/info-manager.service';
 import { Info } from './../info-manager/info.model';
 import { Ticket } from './../ticketing/ticket.model';
@@ -24,11 +26,19 @@ export class DataStorageService {
     private taskService: TasksService,
     private authService: AuthService,
     private ticketingService: TicketingService,
-    private infoManagerService: InfoManagerService
+    private infoManagerService: InfoManagerService,
+    private projectsService: ProjectsService
   ) {}
 
   storeTasks () { // change the put string to the correspondent firebase backend
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/task-manager/tasks.json', this.taskService.getTasks(), {
+      reportProgress: true,
+    });
+    return this.httpClient.request(req);
+  }
+
+  storeProjects () { // change the put string to the correspondent firebase backend
+    const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/projects.json', this.projectsService.getProjects(), {
       reportProgress: true,
     });
     return this.httpClient.request(req);
@@ -67,6 +77,22 @@ export class DataStorageService {
     .subscribe(
       (tasks: Task[]) => {
         this.taskService.setTasks(tasks);
+      }
+    );
+  }
+
+  getProjects() { // change the get string to the correspondent firebase backend
+    this.httpClient.get<Project[]>('https://bims-3bf9d.firebaseio.com/projects.json', {
+      responseType: 'json'
+    })
+    .map(
+      (projects) => {
+        return projects;
+      }
+    )
+    .subscribe(
+      (projects: Project[]) => {
+        this.projectsService.setProjects(projects);
       }
     );
   }

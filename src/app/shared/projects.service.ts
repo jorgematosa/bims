@@ -6,12 +6,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ProjectsService {
-  private projects: Project[] = [
-    new Project('XPTO', 'First Project', ['Administration', 'Human Resources'], ['Passwords', 'Programas', 'Máquinas'], ['hrn234']),
-    new Project('Care', 'Second Project', ['Administration', 'Development'], ['Passwords', 'Programas'], ['hrn234', 'new']),
-    new Project('Ruth', 'Third Project', ['Administration', 'Marketing'], ['Passwords', 'Máquinas'], ['new']),
-    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'], ['Passwords'], [])
-  ];
+  private projects: Project[] = [];
 
   startedEditing: Subject<number> = new BehaviorSubject<number>(null);
   projectSelected: Subject<Project> = new BehaviorSubject<Project>(null);

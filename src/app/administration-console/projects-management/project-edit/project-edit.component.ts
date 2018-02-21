@@ -1,3 +1,5 @@
+import { AuthService } from './../../../auth/auth.service';
+import { User } from './../../../auth/user.model';
 import { UserRolesService } from './../../../shared/user-roles.service';
 import { HttpEvent } from '@angular/common/http';
 import { DataStorageService } from './../../../shared/data.storage.service';
@@ -20,20 +22,25 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   projects: Project[];
   project: Project;
   projectSelected: Project;
+  users: User[];
   editedProjectIndex: number = null;
   userRoles: string[] = [];
   rolesToAdd: string[] = [];
-  selectedValue: string[] = [];
+  selectedRoles: string[] = [];
+  selectedAdmins: string[] = [];
 
   constructor(
     private projectsService: ProjectsService,
     private userRolesService: UserRolesService,
     private router: Router,
     private route: ActivatedRoute,
-    private dataStorageService: DataStorageService) { }
+    private dataStorageService: DataStorageService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.projects = this.projectsService.getProjects();
+    this.users = this.authService.getUsers();
     this.userRoles = this.userRolesService.roles;
     this.subscription = this.projectsService.startedEditing.subscribe(
       (index: number) => {
@@ -72,26 +79,27 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
     this.editedProjectIndex = null;
     this.projectsService.stopEditing();
     // store tasks in backend
-    // this.dataStorageService.storeInfos()
-    // .subscribe(
-    //   (response: HttpEvent<Object>) => {
-    //     console.log(response);
-    //   }
-    // );
+    this.dataStorageService.storeProjects()
+    .subscribe(
+      (response: HttpEvent<Object>) => {
+        console.log(response);
+      }
+    );
     // navigate away
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../projects-list'], {relativeTo: this.route});
   }
 
   onCancel() {
     this.editedProjectIndex = null;
     this.projectsService.stopEditing();
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['../projects-list'], {relativeTo: this.route});
   }
 
   private initForm() {
     if (this.editedProjectIndex !== null) {
       this.project = this.projectsService.getProject(this.editedProjectIndex);
-      this.selectedValue = this.project.roleAccess;
+      this.selectedRoles = this.project.roleAccess;
+      this.selectedAdmins = this.project.administrators;
       this.projectEditForm = new FormGroup({
         'name': new FormControl(this.project.name, Validators.required),
         'description': new FormControl(this.project.description, Validators.required),
@@ -104,8 +112,8 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
         'name': new FormControl(null, Validators.required),
         'description': new FormControl(null, Validators.required),
         'roleAccess': new FormControl(null, Validators.required),
-        'infoSections': new FormControl(this.project.infoSections),
-        'administrators': new FormControl(this.project.administrators)
+        'infoSections': new FormControl(null),
+        'administrators': new FormControl(null)
       });
     }
   }

@@ -21,11 +21,11 @@
       <span id="text">Projects Management {{showAll ? '+' : '-'}}</span>
     </span>
     <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
-      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
+      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'" routerLinkActive="active" routerLink="/administrator/project-edit">
         <span id="subText">Create Project</span><br>
       </li>
-      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
-        <span id="subText" routerLinkActive="active" routerLink="/administrator/project-list">Edit Project</span>
+      <li class="nav-item" style="cursor: pointer;" routerLinkActive="active" routerLink="/administrator/projects-list">
+        <span id="subText" >Edit Project</span>
       </li>
       <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
         <span id="subText">Delete Project</span>
