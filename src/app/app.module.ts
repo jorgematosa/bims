@@ -1,3 +1,4 @@
+import { UserRolesService } from './shared/user-roles.service';
 import { TicketingService } from './ticketing/ticketing.service';
 import { ProjectsService } from './shared/projects.service';
 import { TicketingGuard } from './ticketing/access-guard.service';
@@ -44,8 +45,8 @@ import { ProjectDeleteComponent } from './administration-console/projects-manage
 import { ProjectAccessComponent } from './administration-console/projects-management/project-access/project-access.component';
 import { ProjectInfoManagerSectionsComponent } from './administration-console/projects-management/project-info-manager-sections/project-info-manager-sections.component';
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
-
-
+import { MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,11 @@ import { ProjectsListComponent } from './administration-console/projects-managem
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    BrowserAnimationsModule
   ],
   providers: [
     TasksService,
@@ -94,6 +99,7 @@ import { ProjectsListComponent } from './administration-console/projects-managem
     AuthGuard,
     TicketingGuard,
     DataStorageService,
+    UserRolesService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
