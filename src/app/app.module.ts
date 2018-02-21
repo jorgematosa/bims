@@ -39,6 +39,11 @@ import { InfoManagerService } from './info-manager/info-manager.service';
 import { InfoComponent } from './info-manager/info/info.component';
 import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
 import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
+import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
+import { ProjectDeleteComponent } from './administration-console/projects-management/project-delete/project-delete.component';
+import { ProjectAccessComponent } from './administration-console/projects-management/project-access/project-access.component';
+import { ProjectInfoManagerSectionsComponent } from './administration-console/projects-management/project-info-manager-sections/project-info-manager-sections.component';
+import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
 
 
 
@@ -67,7 +72,12 @@ import { InfoDetailComponent } from './info-manager/info-detail/info-detail.comp
     TicketDetailComponent,
     InfoComponent,
     InfoEditComponent,
-    InfoDetailComponent
+    InfoDetailComponent,
+    ProjectEditComponent,
+    ProjectDeleteComponent,
+    ProjectAccessComponent,
+    ProjectInfoManagerSectionsComponent,
+    ProjectsListComponent
   ],
   imports: [
     BrowserModule,

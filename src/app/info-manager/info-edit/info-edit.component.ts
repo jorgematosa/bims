@@ -70,15 +70,13 @@ export class InfoEditComponent implements OnInit, OnDestroy {
     if (this.editedInfoIndex !== null) {
       this.infoManagerService.updateInfo(this.editedInfoIndex, newInfo);
     } else {
-      console.log(newInfo);
       this.infoManagerService.addInfo(newInfo);
-      console.log(this.infoManagerService.getInfos());
-      // select created task
+      // select created info
       this.infoManagerService.createdInfoSelecting();
     }
     this.editedInfoIndex = null;
     this.infoManagerService.stopEditing();
-    // store tasks in backend
+    // store infos in backend
     this.dataStorageService.storeInfos()
     .subscribe(
       (response: HttpEvent<Object>) => {

@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs';
 import { Project } from './project.model';
 import { Injectable } from '@angular/core';
 
@@ -5,11 +7,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProjectsService {
   private projects: Project[] = [
-    new Project('XPTO', 'First Project', ['Administration', 'Human Resources'], ['Passwords', 'Programas', 'Máquinas']),
-    new Project('Care', 'Second Project', ['Administration', 'Development'], ['Passwords', 'Programas']),
-    new Project('Ruth', 'Third Project', ['Administration', 'Marketing'], ['Passwords', 'Máquinas']),
-    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'], ['Passwords'])
+    new Project('XPTO', 'First Project', ['Administration', 'Human Resources'], ['Passwords', 'Programas', 'Máquinas'], ['hrn234']),
+    new Project('Care', 'Second Project', ['Administration', 'Development'], ['Passwords', 'Programas'], ['hrn234', 'new']),
+    new Project('Ruth', 'Third Project', ['Administration', 'Marketing'], ['Passwords', 'Máquinas'], ['new']),
+    new Project('Last', 'Fourth Project', ['Administration', 'Quality Management'], ['Passwords'], [])
   ];
+
+  startedEditing: Subject<number> = new BehaviorSubject<number>(null);
+  projectSelected: Subject<Project> = new BehaviorSubject<Project>(null);
 
   getProjects() {
     return this.projects.slice();
@@ -41,5 +46,52 @@ export class ProjectsService {
         return project;
       }
     }
+  }
+
+  getProjectsLength() {
+    return this.projects.length;
+  }
+
+  getProject(index: number) {
+    return this.projects[index];
+  }
+
+  setProjects(projects: Project[]) {
+    this.projects = projects;
+  }
+
+  startEditing(index: number) {
+    this.startedEditing.next(index);
+  }
+
+  stopEditing() {
+    this.startedEditing.next(null);
+  }
+
+  updateProject(index: number, project: Project) {
+    this.projects[index] = project;
+  }
+
+  addProject(project: Project) {
+    this.projects.push(project);
+  }
+
+  // projectSelection(index: number) {
+  //   this.projectSelected = index;
+  // }
+
+  // createdProjectSelecting() {
+  //   this.projectSelected = this.projects.length - 1;
+  // }
+
+  roleExists(role: string) {
+    for (const project of this.projects) {
+      for (const roles of project.roleAccess) {
+        if (roles === role) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

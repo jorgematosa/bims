@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-10">
+      <h3>List of Accessable Projects</h3>
+    </div>
+  </div>
+  <br><br>
+  <div class="table table-responsive" align="center">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Roles with access</th>
+          <th>Information Manager Sections</th>
+          <th>Administrators</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects; let i = index" (click)="onEditProject(i)" style="cursor: pointer;">
+        <ng-container *ngIf="hasAccess(project.roleAccess) || loggedUser.role === 'Administrator'">
+          <td>{{ project.name }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.roleAccess }}</td>
+          <td>{{ project.infoSections }}</td>
+          <td>{{ project.administrators }}</td>
+          <td><button class="btn-xs btn-success" (click)="onEditProject(i)">Edit</button></td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </div>
+</div>

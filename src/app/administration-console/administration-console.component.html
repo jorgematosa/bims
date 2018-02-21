@@ -5,28 +5,45 @@
     </div>
   </div>
 </div>
-<div class="sidebar-sticky" *ngIf="isLoaded()">
+<div class="sidebar-sticky" data-spy="affix" data-offset-top="0" *ngIf="isLoaded()">
   <ul class="nav flex-column">
     <label id="title">Administration</label>
     <hr>
-    <span class="nav-item">
+    <span class="nav-item" *ngIf="loggedUser.role === 'Administration'">
       <span id="text" (click)="onRegister()" style="cursor: pointer">Register User</span>
+      <hr>
     </span>
-    <hr>
-    <span class="nav-item">
+    <span class="nav-item" *ngIf="loggedUser.role === 'Administration'">
       <span id="text" (click)="onUpdate()" style="cursor: pointer">Update User</span>
+      <hr>
     </span>
-    <hr>
-    <span class="nav-item">
-      <span id="text" style="cursor: pointer">Create Project</span>
+    <span class="nav-item" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;" (click)="showAll = !showAll">
+      <span id="text">Projects Management {{showAll ? '+' : '-'}}</span>
     </span>
+    <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
+        <span id="subText">Create Project</span><br>
+      </li>
+      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
+        <span id="subText" routerLinkActive="active" routerLink="/administrator/project-list">Edit Project</span>
+      </li>
+      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'">
+        <span id="subText">Delete Project</span>
+      </li>
+      <li class="nav-item" style="cursor: pointer;">
+        <span id="subText">Project Access</span>
+      </li>
+      <li class="nav-item" style="cursor: pointer;">
+        <span id="subText">Info Manager Sections</span>
+      </li>
+    </div>
   </ul>
 </div>
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="isLoaded()">
   <br><br>
   <div class="row text-center">
-    <div class="col-md-10">
-        <router-outlet></router-outlet>
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

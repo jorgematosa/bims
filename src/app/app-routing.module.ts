@@ -1,3 +1,5 @@
+import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
+import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
 import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
 import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
 import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
@@ -56,7 +58,9 @@ const appRoutes: Routes = [
   // { path: 'user-area', component: PeopleAndProcessesComponent},
   // { path: 'administration', component: PeopleAndProcessesComponent}
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
-    { path: 'register', component: RegisterComponent} // nest under AdministrationConsoleModule
+    { path: 'register', component: RegisterComponent},
+    { path: 'project-list', component: ProjectsListComponent },
+    { path: 'project-edit', component: ProjectEditComponent }
   ]},
   { path: '**', redirectTo: '/'}
 ];

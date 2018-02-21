@@ -12,6 +12,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class AdministrationConsoleComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   loggedUser: User = null;
+  showAll = true;
 
   constructor(
     private router: Router,
