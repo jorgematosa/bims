@@ -22,7 +22,6 @@ import { HeaderComponent } from './core/header/header.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
 import { InfoManagerComponent } from './info-manager/info-manager.component';
-import { PeopleAndProcessesComponent } from './people-and-processes/people-and-processes.component';
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -55,7 +54,6 @@ import { ModulesComponent } from './administration-console/modules-management/mo
     TaskManagerComponent,
     TicketingComponent,
     InfoManagerComponent,
-    PeopleAndProcessesComponent,
     AuthComponent,
     LoginComponent,
     RegisterComponent,

@@ -19,7 +19,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { TaskManagerComponent } from './task-manager/task-manager.component';
 import { NgModule } from '@angular/core';
-import { PeopleAndProcessesComponent } from './people-and-processes/people-and-processes.component';
 import { InfoManagerComponent } from './info-manager/info-manager.component';
 import { TicketingComponent } from './ticketing/ticketing.component';
 import { HomeComponent } from './core/home/home.component';
@@ -55,9 +54,6 @@ const appRoutes: Routes = [
     { path: 'info-detail', component: InfoDetailComponent },
     { path: 'info-edit', component: InfoEditComponent }
   ]},
-  { path: 'people-and-processes', canActivate: [AuthGuard], component: PeopleAndProcessesComponent},
-  // { path: 'user-area', component: PeopleAndProcessesComponent},
-  // { path: 'administration', component: PeopleAndProcessesComponent}
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
     { path: 'register', component: RegisterComponent}, // nest under administration console
     { path: 'projects-list', component: ProjectsListComponent },
