@@ -1,23 +1,19 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" routerLink="/">BIMS</a>
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/task-manager">Task Manager</a>
+      <ul class="navbar-nav mr-auto" *ngIf="usersLoaded">
+        <li class="nav-item" *ngIf="modules[0].status === 'Active'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/task-manager">{{ modules[0].name }}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/ticketing" (click)="onHome()">Ticketing</a>
+        <li class="nav-item" *ngIf="modules[1].status === 'Active'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/ticketing" (click)="onHome()">{{ modules[1].name }}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/info-manager">Info Manager</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/people-and-processes">People and Processes</a>
+        <li class="nav-item" *ngIf="modules[2].status === 'Active'">
+          <a class="nav-link" routerLinkActive="active" routerLink="/info-manager">{{ modules[2].name }}</a>
         </li>
       </ul>
-      <ul class="navbar-nav mr-sm2">
+      <ul class="navbar-nav mr-sm2" *ngIf="usersLoaded">
         <a class="nav-link" routerLink="" (click)="onLogout()">Logout</a>
-        <a class="nav-link" routerLinkActive="active" routerLink="">User Area</a>
         <a class="nav-link" routerLinkActive="active" routerLink="/administrator">Administration</a>
       </ul>
     </div>

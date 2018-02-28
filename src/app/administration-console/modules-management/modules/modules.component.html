@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <h3>List of Accessable Projects</h3>
+      </div>
+    </div>
+    <br><br>
+    <div class="table table-responsive" align="center">
+      <thead>
+        <tr>
+            <th>Module Name</th>
+            <th>Status</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let module of modules; let i = index" >
+          <td>{{ module.name }}</td>
+          <td><span [ngStyle]="{'color': module.status === 'Active' ? 'green' : 'red'}">{{ module.status }}</span></td>
+          <td><button class="btn-xs btn-sm" (click)="onStatusChange(i)" style="cursor: pointer;">{{ module.status === 'Active' ? 'Deactivate' : 'Activate' }}</button></td>
+        </tr>
+      </tbody>
+    </div>
+  </div>

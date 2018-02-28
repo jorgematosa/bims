@@ -16,14 +16,15 @@
         </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let project of projects; let i = index" (click)="onEditProject(i)" style="cursor: pointer;">
-        <ng-container *ngIf="hasAccess(project.roleAccess) || loggedUser.role === 'Administrator'">
+      <tr *ngFor="let project of projects; let i = index" >
+        <ng-container *ngIf="hasAccess(project.roleAccess, project.administrators)">
           <td>{{ project.name }}</td>
           <td>{{ project.description }}</td>
           <td>{{ project.roleAccess }}</td>
           <td>{{ project.infoSections }}</td>
           <td>{{ project.administrators }}</td>
-          <td><button class="btn-xs btn-success" (click)="onEditProject(i)">Edit</button></td>
+          <td><button class="btn-xs btn-success" (click)="onEditProject(i)" style="cursor: pointer;">Edit</button></td>
+          <td><button class="btn-xs btn-danger" (click)="onDeleteProject(i)" style="cursor: pointer;">Delete</button></td>
         </ng-container>
       </tr>
     </tbody>

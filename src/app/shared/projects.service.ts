@@ -71,6 +71,10 @@ export class ProjectsService {
     this.projects.push(project);
   }
 
+  deleteProject(index: number) {
+      this.projects.splice(index, 1);
+  }
+
   // projectSelection(index: number) {
   //   this.projectSelected = index;
   // }

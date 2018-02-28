@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../../shared/data.storage.service';
 import { User } from './../../../auth/user.model';
 import { AuthService } from './../../../auth/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -18,6 +19,7 @@ export class ProjectsListComponent implements OnInit, OnChanges {
   constructor(
     private authService: AuthService,
     private projectsService: ProjectsService,
+    private dataStorageService: DataStorageService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -28,20 +30,24 @@ export class ProjectsListComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.projects = this.projectsService.getProjects();
+    console.log(this.projects);
   }
-
-  // onSelectTask(index: number) {
-  //   this.tasksService.taskSelecting(index);
-  //   this.router.navigate(['../task-detail'], {relativeTo: this.route});
-  // }
 
   onEditProject(index: number) {
     this.projectsService.startEditing(index);
     this.router.navigate(['../project-edit'], {relativeTo: this.route});
   }
 
-  hasAccess(roleAccess: string[]) { // verifica os tickets a que o utilizador tem acesso
-    if (roleAccess.indexOf(this.loggedUser.role) > -1) {
+  onDeleteProject(index: number) {
+    this.projectsService.deleteProject(index);
+    this.dataStorageService.removeProject(index);
+    this.projects = this.projectsService.getProjects();
+  }
+
+  hasAccess(roleAccess: string[], administrators: string[]) { // verifica os tickets a que o utilizador tem acesso
+    if (this.loggedUser.role === 'Administration') {
+      return true;
+    } else if (administrators.indexOf(this.loggedUser.username) > -1) {
       return true;
     } else {
       return false;

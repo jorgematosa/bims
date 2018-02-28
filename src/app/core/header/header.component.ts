@@ -1,17 +1,37 @@
+import { Module } from './../../shared/module.model';
+import { ModulesService } from './../../shared/module.service';
+import { Subscription } from 'rxjs';
 import { TicketingService } from './../../ticketing/ticketing.service';
 import { AuthService } from './../../auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  usersSubscription: Subscription;
+  usersLoaded = false;
+  modules: Module[];
 
-  constructor(private authService: AuthService, private ticketingService: TicketingService) { }
+  constructor(private authService: AuthService, private ticketingService: TicketingService, private modulesService: ModulesService) { }
 
   ngOnInit() {
+    this.usersSubscription = this.authService.usersLoaded.subscribe(
+      (flag: boolean) => {
+        if (flag) {
+          this.usersLoaded = true;
+          this.modules = this.modulesService.modules; // talvez mudar
+        } else {
+          this.usersLoaded = false;
+        }
+      }
+  );
+  }
+
+  ngOnDestroy() {
+    this.usersSubscription.unsubscribe();
   }
 
   onLogout() {

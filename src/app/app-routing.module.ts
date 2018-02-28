@@ -1,3 +1,4 @@
+import { ModulesComponent } from './administration-console/modules-management/modules/modules.component';
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
 import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
 import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
@@ -60,7 +61,8 @@ const appRoutes: Routes = [
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
     { path: 'register', component: RegisterComponent}, // nest under administration console
     { path: 'projects-list', component: ProjectsListComponent },
-    { path: 'project-edit', component: ProjectEditComponent }
+    { path: 'project-edit', component: ProjectEditComponent },
+    { path: 'modules-activation', component: ModulesComponent }
   ]},
   { path: '**', redirectTo: '/'}
 ];

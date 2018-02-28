@@ -44,6 +44,7 @@ export class AppComponent implements OnInit {
 
       setTimeout(
         () => {
+          this.dataStorageService.getModules();
           this.dataStorageService.getUsers(this.loggedUserEmail);
           this.dataStorageService.getProjects();
         }, 1200

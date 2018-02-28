@@ -1,3 +1,4 @@
+import { ModulesService } from './shared/module.service';
 import { UserRolesService } from './shared/user-roles.service';
 import { TicketingService } from './ticketing/ticketing.service';
 import { ProjectsService } from './shared/projects.service';
@@ -47,6 +48,7 @@ import { ProjectInfoManagerSectionsComponent } from './administration-console/pr
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
 import { MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModulesComponent } from './administration-console/modules-management/modules/modules.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProjectDeleteComponent,
     ProjectAccessComponent,
     ProjectInfoManagerSectionsComponent,
-    ProjectsListComponent
+    ProjectsListComponent,
+    ModulesComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
+    ModulesService,
     TasksService,
     ProjectsService,
     TicketingService,

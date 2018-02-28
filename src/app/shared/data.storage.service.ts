@@ -1,3 +1,5 @@
+import { Module } from './module.model';
+import { ModulesService } from './module.service';
 import { Project } from './project.model';
 import { ProjectsService } from './projects.service';
 import { InfoManagerService } from './../info-manager/info-manager.service';
@@ -27,8 +29,16 @@ export class DataStorageService {
     private authService: AuthService,
     private ticketingService: TicketingService,
     private infoManagerService: InfoManagerService,
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private modulesService: ModulesService
   ) {}
+
+  storeModules () { // change the put string to the correspondent firebase backend
+    const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/modules.json', this.modulesService.getModules(), {
+      reportProgress: true,
+    });
+    return this.httpClient.request(req);
+  }
 
   storeTasks () { // change the put string to the correspondent firebase backend
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/task-manager/tasks.json', this.taskService.getTasks(), {
@@ -42,6 +52,14 @@ export class DataStorageService {
       reportProgress: true,
     });
     return this.httpClient.request(req);
+  }
+
+  removeProject (index: number) {
+    this.httpClient.delete('https://bims-3bf9d.firebaseio.com/projects/' + index + '.json')
+    .subscribe(
+      (val) => {
+          console.log('The project was deleted');
+      });
   }
 
   storeUsers () {
@@ -63,6 +81,22 @@ export class DataStorageService {
       reportProgress: true,
     });
     return this.httpClient.request(req);
+  }
+
+  getModules() { // change the get string to the correspondent firebase backend
+    this.httpClient.get<Module[]>('https://bims-3bf9d.firebaseio.com/modules.json', {
+      responseType: 'json'
+    })
+    .map(
+      (modules) => {
+        return modules;
+      }
+    )
+    .subscribe(
+      (modules: Module[]) => {
+        this.modulesService.setModules(modules);
+      }
+    );
   }
 
   getTasks() { // change the get string to the correspondent firebase backend
