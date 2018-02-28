@@ -8,7 +8,7 @@
       <h4 id="text">Your Projects</h4>
     </span>
     <li class="nav-item" *ngFor="let project of projects" id="projects" (click)="onTicketsShow(project, false)" style="cursor: pointer;">
-      <span id="text">{{ project.name }}</span>
+      <ng-container *ngIf="hasAccess(project)"><span id="text">{{ project.name }}</span></ng-container>
     </li>
     <hr>
     <span class="nav-item" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="cursor: pointer;" (click)="showAll = !showAll">
@@ -16,7 +16,7 @@
     </span>
     <div id="collapseOne" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
       <li class="nav-item" *ngFor="let project of allProjects" id="projects" (click)="onTicketsShow(project, true)" style="cursor: pointer;">
-        <span id="text">{{ project.name }}</span>
+        <ng-container *ngIf="project!== null "><span id="text">{{ project.name }}</span></ng-container>
       </li>
     </div>
   </ul>

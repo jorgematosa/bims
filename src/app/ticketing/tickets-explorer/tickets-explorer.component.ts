@@ -27,7 +27,8 @@ export class TicketsExplorerComponent implements OnInit {
 
   ngOnInit() {
     this.loggedUser = this.authService.loggedUser;
-    this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+    // this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+    this.projects = this.projectsService.getProjects();
     this.allProjects = this.projectsService.getProjects();
   }
 
@@ -46,5 +47,15 @@ export class TicketsExplorerComponent implements OnInit {
   showUserTickets() {
     this.ticketingService.showUserTickets.next(true);
     this.router.navigate(['tickets-list'], {relativeTo: this.route});
+  }
+
+  hasAccess(project: Project) {
+    if (project === null) {
+      return false;
+    } else if (project.roleAccess.indexOf(this.authService.loggedUser.role) > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
