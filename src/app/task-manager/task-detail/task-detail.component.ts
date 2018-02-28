@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data.storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Task } from './../task.model';
 import { TasksService } from './../tasks.service';
@@ -12,7 +13,11 @@ export class TaskDetailComponent implements OnInit {
   task: Task;
   taskSelected: number;
 
-  constructor(private tasksService: TasksService, private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private tasksService: TasksService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
     this.taskSelected = this.tasksService.taskSelected;
@@ -25,6 +30,12 @@ export class TaskDetailComponent implements OnInit {
   }
 
   onGoBack() {
+    this.router.navigate(['../tasks'], {relativeTo: this.route});
+  }
+
+  onDeleteTask() {
+    this.tasksService.removeTask(this.taskSelected);
+    this.dataStorageService.removeTask(this.taskSelected);
     this.router.navigate(['../tasks'], {relativeTo: this.route});
   }
 

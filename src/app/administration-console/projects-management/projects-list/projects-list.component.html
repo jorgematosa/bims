@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let project of projects; let i = index" >
-        <ng-container *ngIf="hasAccess(project.roleAccess, project.administrators)">
+        <ng-container *ngIf="hasAccess(project)">
           <td>{{ project.name }}</td>
           <td>{{ project.description }}</td>
           <td>{{ project.roleAccess }}</td>

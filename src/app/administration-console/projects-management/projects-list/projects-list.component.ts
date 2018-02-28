@@ -44,10 +44,12 @@ export class ProjectsListComponent implements OnInit, OnChanges {
     this.projects = this.projectsService.getProjects();
   }
 
-  hasAccess(roleAccess: string[], administrators: string[]) { // verifica os tickets a que o utilizador tem acesso
-    if (this.loggedUser.role === 'Administration') {
+  hasAccess(project: Project) { // verifica os tickets a que o utilizador tem acesso
+    if (project === null) {
+      return false;
+    } else if (this.loggedUser.role === 'Administration') {
       return true;
-    } else if (administrators.indexOf(this.loggedUser.username) > -1) {
+    } else if (project.administrators.indexOf(this.loggedUser.username) > -1) {
       return true;
     } else {
       return false;

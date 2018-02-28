@@ -37,7 +37,8 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+          // this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+          this.projects = this.projectsService.getProjects();
           this.projectSelectedIndex = this.tasksService.projectSelected;
           this.tasksService.selectProject(this.projectSelectedIndex);
           this.dataStorageService.getTasks();
@@ -74,6 +75,16 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
     // checking the route
     if (this.router.url === '/task-manager') {
       this.router.navigate(['tasks'], {relativeTo: this.route});
+    }
+  }
+
+  hasAccess(project: Project) {
+    if (project === null) {
+      return false;
+    } else if (project.roleAccess.indexOf(this.authService.loggedUser.role) > -1) {
+      return true;
+    } else {
+      return false;
     }
   }
 

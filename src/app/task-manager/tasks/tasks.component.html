@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of tasks; let i = index" (click)="onSelectTask(i)" style="cursor: pointer;">
-        <ng-container *ngIf="item.project.name === projects[projectSelected].name">
+        <ng-container *ngIf="showTask(item)">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.details }}</td>

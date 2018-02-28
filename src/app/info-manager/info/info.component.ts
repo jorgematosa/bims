@@ -1,6 +1,6 @@
+import { Info } from './../info.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InfoManagerService } from '../info-manager.service';
-import { Info } from '../info.model';
 import { Project } from '../../shared/project.model';
 import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -55,5 +55,16 @@ export class InfoComponent implements OnInit, OnDestroy {
     this.infoManagerService.startEditing(index);
     this.router.navigate(['../info-edit'], {relativeTo: this.route});
   }
+
+  showInfo(info: Info) {
+    if (info === null) {
+      return null;
+    } else if (info.project.name === this.projectSelected.name && info.section === this.currentSection) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 }

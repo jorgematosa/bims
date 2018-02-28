@@ -37,6 +37,10 @@ export class TasksService {
     return this.tasks[index];
   }
 
+  removeTask(index: number) {
+    this.tasks.splice(index, 1);
+  }
+
   startEditing(index: number) {
     this.startedEditing = index;
     this.startedEditingEvent.next(index);

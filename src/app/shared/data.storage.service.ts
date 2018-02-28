@@ -54,14 +54,6 @@ export class DataStorageService {
     return this.httpClient.request(req);
   }
 
-  removeProject (index: number) {
-    this.httpClient.delete('https://bims-3bf9d.firebaseio.com/projects/' + index + '.json')
-    .subscribe(
-      (val) => {
-          console.log('The project was deleted');
-      });
-  }
-
   storeUsers () {
     const req = new HttpRequest('PUT', 'https://bims-3bf9d.firebaseio.com/users.json', this.authService.getUsers(), {
       reportProgress: true,
@@ -183,5 +175,29 @@ export class DataStorageService {
         this.infoManagerService.setInfos(infos);
       }
     );
+  }
+
+  removeProject (index: number) {
+    this.httpClient.delete('https://bims-3bf9d.firebaseio.com/projects/' + index + '.json')
+    .subscribe(
+      (val) => {
+          console.log('The project was deleted');
+      });
+  }
+
+  removeTask (index: number) {
+    this.httpClient.delete('https://bims-3bf9d.firebaseio.com/task-manager/tasks/' + index + '.json')
+    .subscribe(
+      (val) => {
+          console.log('The task was deleted');
+      });
+  }
+
+  removeInfo (index: number) {
+    this.httpClient.delete('https://bims-3bf9d.firebaseio.com/info-manager/infos/' + index + '.json')
+    .subscribe(
+      (val) => {
+          console.log('The info was deleted');
+      });
   }
 }

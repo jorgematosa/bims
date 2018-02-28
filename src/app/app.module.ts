@@ -42,9 +42,6 @@ import { InfoComponent } from './info-manager/info/info.component';
 import { InfoEditComponent } from './info-manager/info-edit/info-edit.component';
 import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
 import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
-import { ProjectDeleteComponent } from './administration-console/projects-management/project-delete/project-delete.component';
-import { ProjectAccessComponent } from './administration-console/projects-management/project-access/project-access.component';
-import { ProjectInfoManagerSectionsComponent } from './administration-console/projects-management/project-info-manager-sections/project-info-manager-sections.component';
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
 import { MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -77,9 +74,6 @@ import { ModulesComponent } from './administration-console/modules-management/mo
     InfoEditComponent,
     InfoDetailComponent,
     ProjectEditComponent,
-    ProjectDeleteComponent,
-    ProjectAccessComponent,
-    ProjectInfoManagerSectionsComponent,
     ProjectsListComponent,
     ModulesComponent
   ],

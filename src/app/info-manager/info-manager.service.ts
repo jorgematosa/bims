@@ -29,6 +29,10 @@ export class InfoManagerService {
     return this.infos[index];
   }
 
+  removeInfo(index: number) {
+    this.infos.splice(index, 1);
+  }
+
   setInfos(infos: Info[]) {
     this.infos = infos;
   }

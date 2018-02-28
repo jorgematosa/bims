@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data.storage.service';
 import { InfoManagerService } from './../info-manager.service';
 import { Info } from './../info.model';
 import { Component, OnInit } from '@angular/core';
@@ -15,7 +16,8 @@ export class InfoDetailComponent implements OnInit {
   constructor(
     private infoManagerService: InfoManagerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,12 @@ export class InfoDetailComponent implements OnInit {
   }
 
   onGoBack() {
+    this.router.navigate(['../info'], {relativeTo: this.route});
+  }
+
+  onDeleteInfo() {
+    this.infoManagerService.removeInfo(this.infoSelected);
+    this.dataStorageService.removeInfo(this.infoSelected);
     this.router.navigate(['../info'], {relativeTo: this.route});
   }
 }

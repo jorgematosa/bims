@@ -57,4 +57,45 @@ export class TasksBoardComponent implements OnInit, OnDestroy, OnChanges {
   newTask() {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }
+
+  showToDo(item: Task) {
+    if (item === null) {
+      return false;
+    } else if (item.state === 'Open' && (item.project.name === this.projects[this.projectSelected].name)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showInProgress(item: Task) {
+    if (item === null) {
+      return false;
+    } else if (item.state === 'In Progress' && (item.project.name === this.projects[this.projectSelected].name)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showDone(item: Task) {
+    if (item === null) {
+      return false;
+    } else if (item.state === 'Done' && (item.project.name === this.projects[this.projectSelected].name)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  showClosed(item: Task) {
+    if (item === null) {
+      return false;
+    } else if (item.state === 'Closed' && (item.project.name === this.projects[this.projectSelected].name)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

@@ -9,7 +9,7 @@
           {{ projectSelected ? projectSelected : 'Select Project' }}
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a (click)="selectProject(project, i)" style="cursor: pointer;" *ngFor="let project of projects; let i = index"><p>{{ project.name }}</p></a>
+          <a (click)="selectProject(project, i)" style="cursor: pointer;" *ngFor="let project of projects; let i = index"><p><ng-container *ngIf="hasAccess(project)">{{ project.name }}</ng-container></p></a>
         </div>
       </div>
     </div>

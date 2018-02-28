@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let info of infos; let i = index" (click)="onSelectInfo(i)" style="cursor: pointer;">
-          <ng-container *ngIf="info.project.name === projectSelected.name && info.section === currentSection">
+          <ng-container *ngIf="showInfo(info)">
             <td>{{ info.summary }}</td>
             <td>{{ info.data }}</td>
             <td>{{ info.observations }}</td>

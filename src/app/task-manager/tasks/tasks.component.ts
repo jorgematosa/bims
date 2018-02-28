@@ -36,6 +36,10 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
     );
     this.tasks = this.tasksService.getTasks();
     this.projects = this.projectsService.getProjects();
+    // resolução
+    // const task = new Task(0, 'Test', 'Test' , 'Low', 'Test', 'Test', 'In Progress', this.projects[0]);
+    // this.tasks[8] = task;
+    // this.tasksService.setTasks(this.tasks);
   }
 
   ngOnChanges() {
@@ -58,5 +62,15 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
 
   newTask() {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
+  }
+
+  showTask(task: Task) {
+    if (task === null) {
+      return false;
+    } else if (task.project.name === this.projects[this.projectSelected].name) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
