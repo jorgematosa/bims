@@ -33,7 +33,6 @@ export class TicketingComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          // this.router.navigate(['ticketing-options'], {relativeTo: this.route});
         }
       }
     );
@@ -41,7 +40,6 @@ export class TicketingComponent implements OnInit, OnDestroy {
     this.homeSubscription = this.ticketingService.home.subscribe(
       (flag: boolean) => {
         this.home = flag;
-        console.log(this.home);
       }
     );
     this.dataStorageService.getTickets();
