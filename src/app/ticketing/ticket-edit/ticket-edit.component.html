@@ -39,19 +39,25 @@
         <hr>
         <div class="row text-center" id="selects">
           <div class="col">
-            <div class="form-group" style="float: center;">
-              <label for="ticketReporter">Reporter</label>
-              <select id="ticketReporter" formControlName="ticketReporter" class="form-control center-block">
-                <option *ngFor="let project of userProjects" [value]="project.name" >{{ project.name }}</option>
-              </select>
-            </div>
+            <label for="ticketReporter">Reporter</label>
+            <mat-form-field>
+              <mat-select placeholder="Choose Reporter" [(ngModel)]="selectedReporter" formControlName="ticketReporter">
+                <mat-option *ngFor="let project of userProjects" [value]="project.name">
+                  {{ project.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div class="col">
             <div class="form-group" style="float: center;">
               <label for="destProject">Assignee</label>
-              <select id="destProject" formControlName="destProject" class="form-control center-block">
-                <option *ngFor="let project of projects" [value]="project.name" >{{ project.name }}</option>
-              </select>
+              <mat-form-field>
+                <mat-select placeholder="Choose Assignee" [(ngModel)]="selectedAssignee" formControlName="destProject">
+                  <mat-option *ngFor="let project of projectsForOptions" [value]="project.name">
+                    {{ project.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
           </div>
         </div>

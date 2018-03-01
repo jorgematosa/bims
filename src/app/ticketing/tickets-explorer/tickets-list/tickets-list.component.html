@@ -7,6 +7,18 @@
 <br><br>
 <span *ngIf="assignedTickets || allProjectsTickets">
   <span *ngIf="!showUserTickets">
+    <div class="row text-center">
+      <div class="col-md-11">
+        <span style="font-weight: bold">Search by id: </span><input type="text" [(ngModel)]="filteredID"><br>
+        <hr>
+        <span style="font-weight: bold">Filter by status: </span>
+        <mat-form-field>
+          <mat-select placeholder="Choose Status" [(ngModel)]="filteredStatus">
+            <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
       <thead>
         <tr>
@@ -21,7 +33,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-          <ng-container *ngIf="ticket.destProject.name === projectSelected.name">
+          <ng-container *ngIf="ticket.destProject.name === this.projectSelected.name && showTicket(ticket)">
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.description }}</td>
@@ -36,6 +48,18 @@
     </div>
   </span>
   <span *ngIf="showUserTickets">
+      <div class="row text-center">
+        <div class="col-md-11">
+          <span style="font-weight: bold">Search by id: </span><input type="text" [(ngModel)]="filteredID"><br>
+          <hr>
+          <span style="font-weight: bold">Filter by status: </span>
+          <mat-form-field>
+            <mat-select placeholder="Choose Status" [(ngModel)]="filteredStatus">
+              <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
       <div class="table table-responsive" align="center">
         <thead>
           <tr>
@@ -50,7 +74,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-            <ng-container *ngIf="hasAccess(ticket.destProject.roleAccess)">
+            <ng-container *ngIf="hasAccess(ticket.destProject.roleAccess) && showTicket(ticket)">
               <td>{{ ticket.id }}</td>
               <td>{{ ticket.summary }}</td>
               <td>{{ ticket.description }}</td>
@@ -67,6 +91,18 @@
 </span>
 <span *ngIf="openedTickets && !allProjectsTickets">
   <span *ngIf="!showUserTickets">
+    <div class="row text-center">
+      <div class="col-md-11">
+        <span style="font-weight: bold">Search by id: </span><input type="text" [(ngModel)]="filteredID"><br>
+        <hr>
+        <span style="font-weight: bold">Filter by status: </span>
+        <mat-form-field>
+          <mat-select placeholder="Choose Status" [(ngModel)]="filteredStatus">
+            <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="table table-responsive" align="center" *ngIf="projectSelected !== null">
       <thead>
         <tr>
@@ -81,7 +117,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-          <ng-container *ngIf="ticket.ticketReporter.name === projectSelected.name">
+          <ng-container *ngIf="ticket.ticketReporter.name === projectSelected.name && showTicket(ticket)">
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.description }}</td>
@@ -96,6 +132,18 @@
     </div>
   </span>
   <span *ngIf="showUserTickets">
+    <div class="row text-center">
+      <div class="col-md-11">
+        <span style="font-weight: bold">Search by id: </span><input type="text" [(ngModel)]="filteredID"><br>
+        <hr>
+        <span style="font-weight: bold">Filter by status: </span>
+        <mat-form-field>
+          <mat-select placeholder="Choose Status" [(ngModel)]="filteredStatus">
+            <mat-option *ngFor="let stat of status" [value]="stat">{{stat}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="table table-responsive" align="center">
       <thead>
         <tr>
@@ -110,7 +158,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let ticket of tickets; let i = index" (click)="onSelectTicket(i)" style="cursor: pointer;">
-          <ng-container *ngIf="hasAccess(ticket.ticketReporter.roleAccess)">
+          <ng-container *ngIf="hasAccess(ticket.ticketReporter.roleAccess) && showTicket(ticket)">
             <td>{{ ticket.id }}</td>
             <td>{{ ticket.summary }}</td>
             <td>{{ ticket.description }}</td>

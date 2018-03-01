@@ -28,12 +28,15 @@ export class TicketEditComponent implements OnInit, OnDestroy {
   // tasks: Task;
   ticket: Ticket;
   projects: Project[];
+  projectsForOptions: Project[];
   userProjects: Project[];
   loggedUser: User;
   projectSelected: Project;
   editingSubscription: Subscription;
   startedEditingSubscription: Subscription;
   startedEditing: number = null;
+  selectedReporter = '';
+  selectedAssignee = '';
 
   constructor(
     private ticketingService: TicketingService,
@@ -54,6 +57,7 @@ export class TicketEditComponent implements OnInit, OnDestroy {
     this.loggedUser = this.authService.loggedUser;
     this.projects = this.projectsService.getProjects();
     this.userProjects = this.projectsService.getProjectsByRole(this.loggedUser.role);
+    this.projectsForOptions = this.projectsService.getProjectsForOptions();
     this.projectSubscription = this.ticketingService.projectSelected.subscribe(
       (project: Project) => {
         this.projectSelected = project;
@@ -74,7 +78,6 @@ export class TicketEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.ticketEditForm);
     const ticketForm = this.ticketEditForm.value;
     const newTicket = new Ticket(
       this.ticketingService.getTicketsLength() + 1,
@@ -115,6 +118,8 @@ export class TicketEditComponent implements OnInit, OnDestroy {
   private initForm() {
     if (this.editedTicketIndex !== null) {
       this.ticket = this.ticketingService.getTicket(this.editedTicketIndex);
+      this.selectedReporter = this.ticket.ticketReporter.name;
+      this.selectedAssignee = this.ticket.destProject.name;
       this.ticketEditForm = new FormGroup({
         'summary': new FormControl(this.ticket.summary, Validators.required),
         'description': new FormControl(this.ticket.description, Validators.required),
@@ -133,6 +138,15 @@ export class TicketEditComponent implements OnInit, OnDestroy {
         'state': new FormControl('Open')
       });
     }
+  }
 
+  hasAccess(project: Project) {
+    if (project === null) {
+      return false;
+    } else if (project.roleAccess.indexOf(this.authService.loggedUser.role) > -1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

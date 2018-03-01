@@ -25,6 +25,9 @@ export class TicketsListComponent implements OnInit, OnDestroy, OnChanges {
   allUserTicketsSubscription: Subscription;
   assignedTickets = true;
   openedTickets = false;
+  filteredID = '';
+  filteredStatus = 'All Status';
+  status = ['All Status', 'Open', 'Closed', 'Under Work'];
 
   constructor(
     private ticketingService: TicketingService,
@@ -104,5 +107,37 @@ export class TicketsListComponent implements OnInit, OnDestroy, OnChanges {
   onEditTicket(index: number) {
     this.ticketingService.startEditing(index);
     this.router.navigate(['../../ticket-edit'], {relativeTo: this.route});
+  }
+
+  showTicket(ticket: Ticket) {
+    // id filter
+    if (this.filteredID !== '') {
+      if (ticket.id === Number(this.filteredID)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    // status filter
+    if (this.filteredStatus === 'All Status') {
+      return true;
+    } else if (this.filteredStatus === 'Open') {
+      if (ticket.state === 'Open') {
+        return true;
+      }
+      return false;
+    } else if (this.filteredStatus === 'Under Work') {
+      if (ticket.state === 'Under Work') {
+        return true;
+      }
+      return false;
+    } else if (this.filteredStatus === 'Closed') {
+      if (ticket.state === 'Closed') {
+        return true;
+      }
+      return false;
+    }
+
+    // return true;
   }
 }

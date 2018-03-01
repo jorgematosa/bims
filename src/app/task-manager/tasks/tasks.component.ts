@@ -21,8 +21,8 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
   projectSelected: number;
   subscription: Subscription;
   filteredID = '';
-  filteredStatus = 'All Statuses';
-  status = ['All Statuses', 'To Do', 'In Progress', 'Done', 'Closed'];
+  filteredStatus = 'All Status';
+  status = ['All Status', 'Open', 'In Progress', 'Done', 'Closed'];
 
   constructor(
     private tasksService: TasksService,
@@ -67,15 +67,6 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }
 
-  // showTask(task: Task) {
-  //   if (task === null) {
-  //     return false;
-  //   } else if (task.project.name === this.projects[this.projectSelected].name) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
   showTask(task: Task) {
     if (task === null) {
       return false;
@@ -89,10 +80,10 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
         }
       }
       // status filter
-      if (this.filteredStatus === 'All Statuses') {
+      if (this.filteredStatus === 'All Status') {
         return true;
-      } else if (this.filteredStatus === 'To Do') {
-        if (task.state === 'To Do') {
+      } else if (this.filteredStatus === 'Open') {
+        if (task.state === 'Open') {
           return true;
         }
         return false;
@@ -113,7 +104,7 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
         return false;
       }
 
-      return true;
+      // return true;
     } else {
       return false;
     }

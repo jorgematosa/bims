@@ -21,7 +21,28 @@ export class ProjectsService {
 
     // gets the index of the items to be removed
     for (const item of projects) {
-      if (!item.roleAccess.includes(role)) {
+      if (item === null) {
+        remIndex.push(projects.indexOf(item));
+      } else if (!item.roleAccess.includes(role)) {
+        remIndex.push(projects.indexOf(item));
+      }
+    }
+
+    // removes the items
+    for (let i = remIndex.length - 1; i >= 0; i--) {
+      projects.splice(remIndex[i], 1);
+    }
+
+    return projects;
+  }
+
+  getProjectsForOptions() {
+    const projects = this.projects.slice();
+    const remIndex: number[] = [];
+
+    // gets the index of the items to be removed
+    for (const item of projects) {
+      if (item === null) {
         remIndex.push(projects.indexOf(item));
       }
     }
@@ -37,7 +58,8 @@ export class ProjectsService {
   getProjectByName(name: string) {
     const projects = this.projects.slice();
     for (const project of projects) {
-      if (project.name === name) {
+      if (project === null) {
+      } else if (project.name === name) {
         return project;
       }
     }
