@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.authService.usersLoaded.subscribe(
       (value: boolean) => {
-        console.log(value);
         this.usersLoaded = value;
       }
     );

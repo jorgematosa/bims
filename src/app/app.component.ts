@@ -1,8 +1,10 @@
+import { ModulesService } from './shared/module.service';
+import { Subscription } from 'rxjs/Subscription';
 import { TasksService } from './task-manager/tasks.service';
 import { User } from './auth/user.model';
 import { DataStorageService } from './shared/data.storage.service';
 import { AuthService } from './auth/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import * as firebase from 'firebase';
 import { OnInit } from '@angular/core';
 
@@ -14,6 +16,7 @@ import { OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'app';
   loggedUserEmail: string;
+
 
   constructor(private authService: AuthService, private dataStorageService: DataStorageService) {}
 

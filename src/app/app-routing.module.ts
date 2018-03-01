@@ -31,11 +31,7 @@ const appRoutes: Routes = [
   { path: '',  component: HomeComponent, children: [
     { path: 'login', component: LoginComponent}
   ]},
-  // { path: 'task-manager', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'task-manager', canActivate: [AuthGuard], component: TaskManagerComponent, children: [
-    // { path: ':pj/tasks', component: TasksComponent },
-    // { path: ':pj/tasks-board', component: TasksBoardComponent },
-    // { path: ':pj/task-edit', component: TaskEditComponent}
     { path: 'tasks', component: TasksComponent},
     { path: 'tasks-board', component: TasksBoardComponent},
     { path: 'task-detail', component: TaskDetailComponent},
@@ -55,7 +51,7 @@ const appRoutes: Routes = [
     { path: 'info-edit', component: InfoEditComponent }
   ]},
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
-    { path: 'register', component: RegisterComponent}, // nest under administration console
+    { path: 'register', component: RegisterComponent},
     { path: 'projects-list', component: ProjectsListComponent },
     { path: 'project-edit', component: ProjectEditComponent },
     { path: 'modules-activation', component: ModulesComponent }

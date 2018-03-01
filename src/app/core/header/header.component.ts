@@ -12,7 +12,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   usersSubscription: Subscription;
+  modulesSubscription: Subscription;
   usersLoaded = false;
+  modulesLoaded = false;
   modules: Module[];
 
   constructor(private authService: AuthService, private ticketingService: TicketingService, private modulesService: ModulesService) { }
@@ -22,16 +24,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag) {
           this.usersLoaded = true;
-          this.modules = this.modulesService.modules; // talvez mudar
         } else {
           this.usersLoaded = false;
         }
       }
-  );
+    );
+
+    this.modulesSubscription = this.modulesService.modulesLoaded.subscribe(
+      (flag: boolean) => {
+        if (flag) {
+          this.modules = this.modulesService.modules;
+          this.modulesLoaded = true;
+        }
+      }
+    );
   }
 
   ngOnDestroy() {
     this.usersSubscription.unsubscribe();
+    this.modulesSubscription.unsubscribe();
   }
 
   onLogout() {
