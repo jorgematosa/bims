@@ -1,19 +1,11 @@
-<div class="container-fluid" *ngIf="!isLoaded()">
+<div class="container-fluid" *ngIf="!isLoaded() || !ticketsLoaded">
   <div class="row text-center">
     <div class="col-md-12">
-      <h3 >Loading</h3>
+      <h1>Loading...</h1>
     </div>
   </div>
 </div>
-<div class="row text-center" *ngIf="isLoaded() && home" id="options">
-  <div class="col-md-12 align-self-start">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-primary" (click)="onSearchTickets()">Search Tickets</button>
-      <button type="button" class="btn btn-primary" (click)="onCreateTicket()">Create Ticket</button>
-    </div>
-  </div>
-</div>
-<span *ngIf="isLoaded() && !home">
+<span *ngIf="isLoaded() && ticketsLoaded">
   <router-outlet></router-outlet>
 </span>
 

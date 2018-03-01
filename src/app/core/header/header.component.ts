@@ -52,7 +52,4 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.modulesService.modulesLoaded.next(false);
   }
 
-  onHome() {
-    this.ticketingService.home.next(true);
-  }
 }

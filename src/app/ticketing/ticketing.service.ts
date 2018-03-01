@@ -7,13 +7,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TicketingService {
-  home: Subject<boolean> = new BehaviorSubject<boolean>(true);
   projectSelected: Subject<Project> = new BehaviorSubject<Project>(null);
   showUserTickets: Subject<boolean> = new BehaviorSubject<boolean>(true);
   userTickets: Subject<boolean> = new BehaviorSubject<boolean>(true);
   projects: Project[] =  this.projectsService.getProjects();
   startedEditing: Subject<number> = new BehaviorSubject<number>(null);
   ticketSelected: number;
+  ticketsLoaded: Subject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private projectsService: ProjectsService) {}
 
@@ -32,6 +32,7 @@ export class TicketingService {
 
   setTickets(tickets: Ticket[]) {
     this.tickets = tickets;
+    this.ticketsLoaded.next(true);
   }
 
   startEditing(index: number) {

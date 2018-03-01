@@ -5,10 +5,8 @@ import { InfoEditComponent } from './info-manager/info-edit/info-edit.component'
 import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
 import { TicketDetailComponent } from './ticketing/tickets-explorer/ticket-detail/ticket-detail.component';
 import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
-import { TicketingGuard } from './ticketing/access-guard.service';
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
-import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketing.component';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AdministrationConsoleComponent } from './administration-console/administration-console.component';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
@@ -38,7 +36,6 @@ const appRoutes: Routes = [
     { path: 'task-edit', component: TaskEditComponent}
   ]},
   { path: 'ticketing', canActivate: [AuthGuard], component: TicketingComponent, children: [
-    { path: 'ticketing-options', component: HomeTicketingComponent},
     { path: 'tickets-explorer', component: TicketsExplorerComponent, children: [
       { path: 'tickets-list', component: TicketsListComponent},
       { path: 'ticket-detail', component: TicketDetailComponent}

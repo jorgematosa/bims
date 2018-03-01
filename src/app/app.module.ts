@@ -2,7 +2,6 @@ import { ModulesService } from './shared/module.service';
 import { UserRolesService } from './shared/user-roles.service';
 import { TicketingService } from './ticketing/ticketing.service';
 import { ProjectsService } from './shared/projects.service';
-import { TicketingGuard } from './ticketing/access-guard.service';
 import { AuthGuard } from './auth/auth-guard.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { DataStorageService } from './shared/data.storage.service';
@@ -31,7 +30,6 @@ import { TasksBoardComponent } from './task-manager/tasks-board/tasks-board.comp
 import { TaskEditComponent } from './task-manager/task-edit/task-edit.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TaskDetailComponent } from './task-manager/task-detail/task-detail.component';
-import { HomeTicketingComponent } from './ticketing/home-ticketing/home-ticketing.component';
 import { TicketsExplorerComponent } from './ticketing/tickets-explorer/tickets-explorer.component';
 import { TicketEditComponent } from './ticketing/ticket-edit/ticket-edit.component';
 import { TicketsListComponent } from './ticketing/tickets-explorer/tickets-list/tickets-list.component';
@@ -63,7 +61,6 @@ import { ModulesComponent } from './administration-console/modules-management/mo
     TasksBoardComponent,
     TaskEditComponent,
     TaskDetailComponent,
-    HomeTicketingComponent,
     TicketsExplorerComponent,
     TicketEditComponent,
     TicketsListComponent,
@@ -94,7 +91,6 @@ import { ModulesComponent } from './administration-console/modules-management/mo
     InfoManagerService,
     AuthService,
     AuthGuard,
-    TicketingGuard,
     DataStorageService,
     UserRolesService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

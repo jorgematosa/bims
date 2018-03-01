@@ -15,9 +15,9 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 })
 export class TicketingComponent implements OnInit, OnDestroy {
   subscription: Subscription;
-  homeSubscription: Subscription;
   loggedUser: User = null;
-  home: boolean;
+  ticketsLoadedSubscription: Subscription;
+  ticketsLoaded = false;
 
   constructor(
     private router: Router,
@@ -36,18 +36,21 @@ export class TicketingComponent implements OnInit, OnDestroy {
         }
       }
     );
+    this.dataStorageService.getTickets();
 
-    this.homeSubscription = this.ticketingService.home.subscribe(
+    this.ticketsLoadedSubscription = this.ticketingService.ticketsLoaded.subscribe(
       (flag: boolean) => {
-        this.home = flag;
+        if (flag) {
+          this.ticketsLoaded = true;
+          this.router.navigate(['/ticketing/tickets-explorer/tickets-list'], {relativeTo: this.route});
+        }
       }
     );
-    this.dataStorageService.getTickets();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.homeSubscription.unsubscribe();
+    this.ticketsLoadedSubscription.unsubscribe();
   }
 
   isLoaded() {
@@ -56,15 +59,5 @@ export class TicketingComponent implements OnInit, OnDestroy {
     } else {
       return false;
     }
-  }
-
-  onSearchTickets() {
-    this.ticketingService.home.next(false);
-    this.router.navigate(['./tickets-explorer/tickets-list'], {relativeTo: this.route});
-  }
-
-  onCreateTicket() {
-    this.ticketingService.home.next(false);
-    this.router.navigate(['./ticket-edit'], {relativeTo: this.route});
   }
 }

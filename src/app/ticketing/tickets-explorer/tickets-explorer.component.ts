@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data.storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TicketingService } from './../ticketing.service';
 import { User } from './../../auth/user.model';
@@ -22,18 +23,17 @@ export class TicketsExplorerComponent implements OnInit {
     private authService: AuthService,
     private ticketingService: TicketingService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dataStorageService: DataStorageService
   ) { }
 
   ngOnInit() {
     this.loggedUser = this.authService.loggedUser;
-    // this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
     this.projects = this.projectsService.getProjects();
     this.allProjects = this.projectsService.getProjects();
   }
 
   onCreateTicket() {
-    this.ticketingService.home.next(false);
     this.router.navigate(['./../ticket-edit'], {relativeTo: this.route});
   }
 
