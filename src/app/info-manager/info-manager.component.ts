@@ -50,6 +50,9 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
     this.currentSectionSubscription = this.infoManagerService.currentSection.subscribe(
       (section: string) => {
         this.currentSection = section;
+        if (section !== null) {
+          this.router.navigate(['info'], {relativeTo: this.route});
+        }
       }
     );
   }

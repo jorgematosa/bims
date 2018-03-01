@@ -18,7 +18,8 @@ import { Data } from '@angular/router/src/config';
 export class TaskManagerComponent implements OnInit, OnDestroy {
   projects = null;
   projectSelectedIndex = -1;
-  projectSelected = null;
+  // projectSelected = null;
+  projectSelected: string;
   startedEditing = null;
   subscription: Subscription;
   loggedUser: User = null;
@@ -41,6 +42,10 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
           this.projectSelectedIndex = this.tasksService.projectSelected;
           this.tasksService.selectProject(this.projectSelectedIndex);
           this.dataStorageService.getTasks();
+          if (this.projectSelectedIndex !== -1) {
+            this.projectSelected = this.projectsService.getProject(this.projectSelectedIndex).name;
+            this.router.navigate(['tasks'], {relativeTo: this.route});
+          }
         }
       }
     );
