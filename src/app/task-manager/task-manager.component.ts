@@ -37,7 +37,6 @@ export class TaskManagerComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          // this.projects = this.projectsService.getProjectsByRole(this.loggedUser.role);
           this.projects = this.projectsService.getProjects();
           this.projectSelectedIndex = this.tasksService.projectSelected;
           this.tasksService.selectProject(this.projectSelectedIndex);

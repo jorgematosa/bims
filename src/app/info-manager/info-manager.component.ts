@@ -16,6 +16,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class InfoManagerComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   userLoadedSubscription: Subscription;
+  currentSectionSubscription: Subscription;
+  currentSection: string = null;
   projectSelected: Project;
   userProjects: Project[] = null;
   loggedUser: User = null;
@@ -45,11 +47,17 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
         }
       }
     );
+    this.currentSectionSubscription = this.infoManagerService.currentSection.subscribe(
+      (section: string) => {
+        this.currentSection = section;
+      }
+    );
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
     this.userLoadedSubscription.unsubscribe();
+    this.currentSectionSubscription.unsubscribe();
   }
 
   isLoaded() {
