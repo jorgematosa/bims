@@ -20,6 +20,9 @@
         <button type="button" class="btn btn-primary" routerLinkActive="active" routerLink="tasks-board">Kanban Board</button>
       </div>
     </div>
+    <div class="col-md-12" *ngIf="!projectSelected">
+      <h1>Please Select a project to Start Working!</h1>
+    </div>
   </div>
   <br><br>
   <router-outlet></router-outlet>
