@@ -20,6 +20,9 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
   projects: Project[];
   projectSelected: number;
   subscription: Subscription;
+  filteredID = '';
+  filteredStatus = 'All Statuses';
+  status = ['All Statuses', 'To Do', 'In Progress', 'Done', 'Closed'];
 
   constructor(
     private tasksService: TasksService,
@@ -64,10 +67,52 @@ export class TasksComponent implements OnInit, OnDestroy, OnChanges {
     this.router.navigate(['../task-edit'], {relativeTo: this.route});
   }
 
+  // showTask(task: Task) {
+  //   if (task === null) {
+  //     return false;
+  //   } else if (task.project.name === this.projects[this.projectSelected].name) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
   showTask(task: Task) {
     if (task === null) {
       return false;
     } else if (task.project.name === this.projects[this.projectSelected].name) {
+      // id filter
+      if (this.filteredID !== '') {
+        if (task.id === Number(this.filteredID)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+      // status filter
+      if (this.filteredStatus === 'All Statuses') {
+        return true;
+      } else if (this.filteredStatus === 'To Do') {
+        if (task.state === 'To Do') {
+          return true;
+        }
+        return false;
+      } else if (this.filteredStatus === 'In Progress') {
+        if (task.state === 'In Progress') {
+          return true;
+        }
+        return false;
+      } else if (this.filteredStatus === 'Done') {
+        if (task.state === 'Done') {
+          return true;
+        }
+        return false;
+      } else if (this.filteredStatus === 'Closed') {
+        if (task.state === 'Closed') {
+          return true;
+        }
+        return false;
+      }
+
       return true;
     } else {
       return false;

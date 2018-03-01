@@ -39,7 +39,6 @@ export class ProjectsListComponent implements OnInit, OnChanges {
   }
 
   onDeleteProject(index: number) {
-    this.projectsService.deleteProject(index);
     this.dataStorageService.removeProject(index);
     this.projects = this.projectsService.getProjects();
   }

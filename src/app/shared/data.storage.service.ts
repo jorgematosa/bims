@@ -178,6 +178,7 @@ export class DataStorageService {
   }
 
   removeProject (index: number) {
+    this.projectsService.deleteProject(index);
     this.httpClient.delete('https://bims-3bf9d.firebaseio.com/projects/' + index + '.json')
     .subscribe(
       (val) => {
@@ -186,6 +187,8 @@ export class DataStorageService {
   }
 
   removeTask (index: number) {
+    this.taskService.removeTask(index);
+    console.log(this.taskService.getTasks());
     this.httpClient.delete('https://bims-3bf9d.firebaseio.com/task-manager/tasks/' + index + '.json')
     .subscribe(
       (val) => {
@@ -194,6 +197,7 @@ export class DataStorageService {
   }
 
   removeInfo (index: number) {
+    this.infoManagerService.removeInfo(index);
     this.httpClient.delete('https://bims-3bf9d.firebaseio.com/info-manager/infos/' + index + '.json')
     .subscribe(
       (val) => {

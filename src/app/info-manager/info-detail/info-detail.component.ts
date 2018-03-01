@@ -37,7 +37,6 @@ export class InfoDetailComponent implements OnInit {
   }
 
   onDeleteInfo() {
-    this.infoManagerService.removeInfo(this.infoSelected);
     this.dataStorageService.removeInfo(this.infoSelected);
     this.router.navigate(['../info'], {relativeTo: this.route});
   }

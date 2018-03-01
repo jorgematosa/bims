@@ -34,7 +34,6 @@ export class TaskDetailComponent implements OnInit {
   }
 
   onDeleteTask() {
-    this.tasksService.removeTask(this.taskSelected);
     this.dataStorageService.removeTask(this.taskSelected);
     this.router.navigate(['../tasks'], {relativeTo: this.route});
   }
