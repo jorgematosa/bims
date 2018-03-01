@@ -35,6 +35,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (flag) {
           this.modules = this.modulesService.modules;
           this.modulesLoaded = true;
+        } else {
+            this.modulesLoaded = false;
         }
       }
     );
@@ -47,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.logout();
+    this.modulesService.modulesLoaded.next(false);
   }
 
   onHome() {
