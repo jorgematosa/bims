@@ -74,6 +74,7 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
   selectProject(project: Project) {
     this.infoManagerService.projectSelected.next(project);
     this.infoManagerService.currentSection.next(null);
+    this.router.navigate(['info-manager']);
   }
 
   onInfo(infoSection: string) {
