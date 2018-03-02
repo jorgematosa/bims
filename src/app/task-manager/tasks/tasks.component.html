@@ -4,7 +4,6 @@
       <button class="btn btn-success" (click)="newTask()" *ngIf="projectSelected !== -1">Create New Task</button>
     </div>
   </div>
-  <br><br>
   <div class="row text-center" *ngIf="projectSelected !== -1">
     <div class="col-md-11">
       <span style="font-weight: bold">Search by id: </span><input type="text" [(ngModel)]="filteredID"><br>
