@@ -66,19 +66,18 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
       projectForm.name,
       projectForm.description,
       projectForm.roleAccess,
-      projectForm.infoSections,
+      projectForm.infoSections.split(','),
       projectForm.administrators
     );
     if (this.editedProjectIndex !== null) {
+      console.log(projectForm.infoSections.split(','));
       this.projectsService.updateProject(this.editedProjectIndex, newProject);
     } else {
       this.projectsService.addProject(newProject);
-      // select created task
-      // this.projectsService.createdProjectSelecting();
     }
     this.editedProjectIndex = null;
     this.projectsService.stopEditing();
-    // store tasks in backend
+    // store project in backend
     this.dataStorageService.storeProjects()
     .subscribe(
       (response: HttpEvent<Object>) => {
