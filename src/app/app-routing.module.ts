@@ -1,3 +1,4 @@
+import { AdminHomeComponent } from './administration-console/admin-home/admin-home.component';
 import { ModulesComponent } from './administration-console/modules-management/modules/modules.component';
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
 import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     { path: 'info-edit', component: InfoEditComponent }
   ]},
   { path: 'administrator', canActivate: [AuthGuard], component: AdministrationConsoleComponent, children: [
+    { path: 'home', component: AdminHomeComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'projects-list', component: ProjectsListComponent },
     { path: 'project-edit', component: ProjectEditComponent },

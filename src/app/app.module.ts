@@ -43,6 +43,7 @@ import { ProjectsListComponent } from './administration-console/projects-managem
 import { MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModulesComponent } from './administration-console/modules-management/modules/modules.component';
+import { AdminHomeComponent } from './administration-console/admin-home/admin-home.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ModulesComponent } from './administration-console/modules-management/mo
     InfoDetailComponent,
     ProjectEditComponent,
     ProjectsListComponent,
-    ModulesComponent
+    ModulesComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

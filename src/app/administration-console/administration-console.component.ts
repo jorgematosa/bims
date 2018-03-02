@@ -26,7 +26,7 @@ export class AdministrationConsoleComponent implements OnInit, OnDestroy {
       (flag: boolean) => {
         if (flag === true) {
           this.loggedUser = this.authService.getLoggedUser();
-          // this.router.navigate(['ticketing-options'], {relativeTo: this.route});
+          this.router.navigate(['home'], {relativeTo: this.route});
         }
       }
     );
