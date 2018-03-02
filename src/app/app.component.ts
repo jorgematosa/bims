@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   verifyToken() {
     // persistent login
     const tokenKey = Object.keys(window.localStorage)
-    .filter(it => it.startsWith('firebase:authUser'))[0]; // change to [0] in AWS
+    .filter(it => it.startsWith('firebase:authUser'))[1]; // change to [0] in AWS
     if (tokenKey) {
       const authToken = JSON.parse(localStorage.getItem(tokenKey)).stsTokenManager.accessToken;
       this.authService.token = authToken;
