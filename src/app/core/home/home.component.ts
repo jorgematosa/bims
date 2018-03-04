@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (flag) {
           this.modulesLoaded = true;
           this.modules = this.modulesService.modules;
+        } else {
+          this.modulesLoaded = false;
         }
       }
     );
