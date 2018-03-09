@@ -121,7 +121,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         console.log('User already exists');
       }
     }
-      // registering a new user
+    // registering a new user
     if (!this.authService.updatingUser) {
       if (this.authService.userExists(user.username)) {
         if (this.authService.emailExists(user.email)) {

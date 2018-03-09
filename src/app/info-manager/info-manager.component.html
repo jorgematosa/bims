@@ -7,7 +7,7 @@
       {{ projectSelected !== null ? projectSelected.name : 'Select Project' }}
     </button>
     <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-      <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of userProjects; let i = index"><p><ng-container *ngIf="project!==null">{{ project.name }}</ng-container></p></a>
+      <a (click)="selectProject(project)" style="cursor: pointer;" *ngFor="let project of userProjects; let i = index"><p>{{ project.name }}</p></a>
     </div>
     </a>
   <div class="collapse navbar-collapse">

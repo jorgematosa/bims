@@ -42,7 +42,7 @@ export class InfoManagerComponent implements OnInit, OnDestroy {
         if (flag === true) {
           this.loggedUser = this.authService.loggedUser;
           // this.userProjects = this.projectsService.getProjectsByRole(this.loggedUser.role);
-          this.userProjects = this.projectsService.getProjects();
+          this.userProjects = this.projectsService.getProjectsByRole(this.loggedUser.role);
           this.dataStorageService.getInfos();
         }
       }

@@ -67,7 +67,7 @@ export class TicketsListComponent implements OnInit, OnDestroy, OnChanges {
     this.allUserTicketsSubscription.unsubscribe();
   }
 
-  hasAccess(roleAccess: string[]) { // verifica os tickets a que o utilizador tem acesso
+  hasAccess(roleAccess: string[]) {
     if (roleAccess.indexOf(this.loggedUser.role) > -1) {
       return true;
     } else {
