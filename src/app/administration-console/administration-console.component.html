@@ -24,7 +24,7 @@
       <span id="text">Projects Management {{showAllPM ? '+' : '-'}}</span>
     </span>
     <div id="collapseTwo" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'" routerLinkActive="active" routerLink="/administrator/project-edit">
+      <li class="nav-item" style="cursor: pointer;" *ngIf="loggedUser.role === 'Administration'" (click)="onCreateProject()" routerLinkActive="active" routerLink="/administrator/project-edit">
         <span id="subText">Create Project</span><br>
       </li>
       <li class="nav-item" style="cursor: pointer;" routerLinkActive="active" routerLink="/administrator/projects-list">

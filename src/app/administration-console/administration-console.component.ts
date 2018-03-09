@@ -1,3 +1,4 @@
+import { ProjectsService } from './../shared/projects.service';
 import { User } from './../auth/user.model';
 import { Subscription } from 'rxjs/Subscription';
 import { AuthService } from './../auth/auth.service';
@@ -19,7 +20,9 @@ export class AdministrationConsoleComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private projectsService: ProjectsService
+  ) { }
 
   ngOnInit() {
     this.subscription = this.authService.usersLoaded.subscribe(
@@ -55,4 +58,7 @@ export class AdministrationConsoleComponent implements OnInit, OnDestroy {
     this.router.navigate(['register'], {relativeTo: this.route});
   }
 
+  onCreateProject() {
+    this.projectsService.startedEditing.next(null);
+  }
 }
