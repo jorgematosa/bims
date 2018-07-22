@@ -21,12 +21,12 @@
   </div>
 </nav>
 <hr>
-<div class="row text-center" *ngIf="isLoaded() && projectSelected === null">
+<div class="clearfix text-center" *ngIf="isLoaded() && projectSelected === null">
   <div class="col-md-12">
     <h1>Please Select a Project to Start Working</h1>
   </div>
 </div>
-<div class="row text-center" *ngIf="isLoaded() && projectSelected !== null && currentSection === null">
+<div class="clearfix text-center" *ngIf="isLoaded() && projectSelected !== null && currentSection === null">
   <div class="col-md-12">
     <h1>Please Select a Section of the project</h1>
   </div>

@@ -40,7 +40,7 @@ import { InfoEditComponent } from './info-manager/info-edit/info-edit.component'
 import { InfoDetailComponent } from './info-manager/info-detail/info-detail.component';
 import { ProjectEditComponent } from './administration-console/projects-management/project-edit/project-edit.component';
 import { ProjectsListComponent } from './administration-console/projects-management/projects-list/projects-list.component';
-import { MatFormFieldModule, MatSelectModule, MatOptionModule} from '@angular/material';
+import { MatFormFieldModule, MatSelectModule, MatOptionModule, MatSidenavModule, MatToolbarModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModulesComponent } from './administration-console/modules-management/modules/modules.component';
 import { AdminHomeComponent } from './administration-console/admin-home/admin-home.component';
@@ -82,6 +82,8 @@ import { AdminHomeComponent } from './administration-console/admin-home/admin-ho
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
+    MatSidenavModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
     FormsModule
   ],
